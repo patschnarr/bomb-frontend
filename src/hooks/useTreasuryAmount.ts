@@ -4,14 +4,14 @@ import useTombFinance from './useTombFinance';
 
 const useTreasuryAmount = () => {
   const [amount, setAmount] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
 
   useEffect(() => {
-    if (tombFinance) {
-      const { Treasury } = tombFinance.contracts;
-      tombFinance.TOMB.balanceOf(Treasury.address).then(setAmount);
+    if (bombFinance) {
+      const { Treasury } = bombFinance.contracts;
+      bombFinance.BOMB.balanceOf(Treasury.address).then(setAmount);
     }
-  }, [tombFinance]);
+  }, [bombFinance]);
   return amount;
 };
 

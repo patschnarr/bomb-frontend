@@ -45,15 +45,15 @@ const StyledTableRow = withStyles((theme) => ({
 
 const Regulations = () => {
   const classes = useStyles();
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   const [rows, setRows] = useState(null);
   function createData(epoch, dao, dev, masonry, bondsBought, bondsRedeemed) {
     var sum = (Number(dao) + Number(dev) + Number(masonry)).toFixed(2);
     return { epoch, dao, dev, masonry, sum, bondsBought, bondsRedeemed };
   }
   useEffect(() => {
-    if (tombFinance) {
-      const thisData = tombFinance.listenForRegulationsEvents();
+    if (bombFinance) {
+      const thisData = bombFinance.listenForRegulationsEvents();
       thisData.then((elements) => {
         setRows(
           elements
@@ -71,7 +71,7 @@ const Regulations = () => {
         );
       });
     }
-  }, [tombFinance]);
+  }, [bombFinance]);
 
   return (
     <Page>

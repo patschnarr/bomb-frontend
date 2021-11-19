@@ -5,22 +5,22 @@ import useRefresh from './useRefresh';
 
 const useTotalStakedOnMasonry = () => {
   const [totalStaked, setTotalStaked] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   const { slowRefresh } = useRefresh();
-  const isUnlocked = tombFinance?.isUnlocked;
+  const isUnlocked = bombFinance?.isUnlocked;
 
   useEffect(() => {
     async function fetchTotalStaked() {
       try {
-        setTotalStaked(await tombFinance.getTotalStakedInMasonry());
-      } catch(err) {
+        setTotalStaked(await bombFinance.getTotalStakedInMasonry());
+      } catch (err) {
         console.error(err);
       }
     }
     if (isUnlocked) {
-     fetchTotalStaked();
+      fetchTotalStaked();
     }
-  }, [isUnlocked, slowRefresh, tombFinance]);
+  }, [isUnlocked, slowRefresh, bombFinance]);
 
   return totalStaked;
 };

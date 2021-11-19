@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import config from '../config';
-import { web3ProviderFrom } from '../tomb-finance/ether-utils';
+import { web3ProviderFrom } from '../bomb-finance/ether-utils';
 
 let provider: ethers.providers.Web3Provider = null;
 

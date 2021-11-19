@@ -3,23 +3,23 @@ import useRefresh from '../useRefresh';
 import useTombFinance from './../useTombFinance';
 
 const useClaimRewardCheck = () => {
-  const  { slowRefresh } = useRefresh();
+  const { slowRefresh } = useRefresh();
   const [canClaimReward, setCanClaimReward] = useState(false);
-  const tombFinance = useTombFinance();
-  const isUnlocked = tombFinance?.isUnlocked;
+  const bombFinance = useTombFinance();
+  const isUnlocked = bombFinance?.isUnlocked;
 
   useEffect(() => {
     async function canUserClaimReward() {
       try {
-        setCanClaimReward(await tombFinance.canUserClaimRewardFromMasonry());
-      } catch(err){
+        setCanClaimReward(await bombFinance.canUserClaimRewardFromMasonry());
+      } catch (err) {
         console.error(err);
-      };
+      }
     }
     if (isUnlocked) {
       canUserClaimReward();
     }
-  }, [isUnlocked, slowRefresh, tombFinance]);
+  }, [isUnlocked, slowRefresh, bombFinance]);
 
   return canClaimReward;
 };

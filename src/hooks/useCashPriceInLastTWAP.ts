@@ -5,17 +5,17 @@ import { BigNumber } from 'ethers';
 
 const useCashPriceInLastTWAP = () => {
   const [price, setPrice] = useState<BigNumber>(BigNumber.from(0));
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
 
   const fetchCashPrice = useCallback(async () => {
-    setPrice(await tombFinance.getTombPriceInLastTWAP());
-  }, [tombFinance]);
+    setPrice(await bombFinance.getTombPriceInLastTWAP());
+  }, [bombFinance]);
 
   useEffect(() => {
-    fetchCashPrice().catch((err) => console.error(`Failed to fetch TOMB price: ${err.stack}`));
+    fetchCashPrice().catch((err) => console.error(`Failed to fetch BOMB price: ${err.stack}`));
     const refreshInterval = setInterval(fetchCashPrice, config.refreshInterval);
     return () => clearInterval(refreshInterval);
-  }, [setPrice, tombFinance, fetchCashPrice]);
+  }, [setPrice, bombFinance, fetchCashPrice]);
 
   return price;
 };

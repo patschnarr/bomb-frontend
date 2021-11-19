@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import useTombFinance from './../useTombFinance';
-import { AllocationTime } from '../../tomb-finance/types';
+import { AllocationTime } from '../../bomb-finance/types';
 
 const useUnstakeTimerMasonry = () => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
   });
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
 
   useEffect(() => {
-    if (tombFinance) {
-      tombFinance.getUserUnstakeTime().then(setTime);
+    if (bombFinance) {
+      bombFinance.getUserUnstakeTime().then(setTime);
     }
-  }, [tombFinance]);
+  }, [bombFinance]);
   return time;
 };
 

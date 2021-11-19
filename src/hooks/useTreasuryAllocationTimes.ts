@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import useTombFinance from './useTombFinance';
-import { AllocationTime } from '../tomb-finance/types';
+import { AllocationTime } from '../bomb-finance/types';
 import useRefresh from './useRefresh';
-
 
 const useTreasuryAllocationTimes = () => {
   const { slowRefresh } = useRefresh();
@@ -10,12 +9,12 @@ const useTreasuryAllocationTimes = () => {
     from: new Date(),
     to: new Date(),
   });
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   useEffect(() => {
-    if (tombFinance) {
-      tombFinance.getTreasuryNextAllocationTime().then(setTime);
+    if (bombFinance) {
+      bombFinance.getTreasuryNextAllocationTime().then(setTime);
     }
-  }, [tombFinance, slowRefresh]);
+  }, [bombFinance, slowRefresh]);
   return time;
 };
 

@@ -3,14 +3,14 @@ import useTombFinance from './useTombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useStakeToMasonry = () => {
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleStake = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(tombFinance.stakeShareToMasonry(amount), `Stake ${amount} TSHARE to the masonry`);
+      handleTransactionReceipt(bombFinance.stakeShareToMasonry(amount), `Stake ${amount} BSHARE to the masonry`);
     },
-    [tombFinance, handleTransactionReceipt],
+    [bombFinance, handleTransactionReceipt],
   );
   return { onStake: handleStake };
 };

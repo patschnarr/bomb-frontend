@@ -46,10 +46,10 @@ export type AllocationTime = {
   to: Date;
 };
 
-export type TShareSwapperStat = {
-  tshareBalance: string;
-  tbondBalance: string;
-  // tombPrice: string;
-  // tsharePrice: string;
-  rateTSharePerTomb: string;
+export type BShareSwapperStat = {
+  bshareBalance: string;
+  bbondBalance: string;
+  // bombPrice: string;
+  // bsharePrice: string;
+  rateBSharePerTomb: string;
 };

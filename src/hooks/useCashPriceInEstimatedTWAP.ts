@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import useTombFinance from './useTombFinance';
-import { TokenStat } from '../tomb-finance/types';
+import { TokenStat } from '../bomb-finance/types';
 import useRefresh from './useRefresh';
 
 const useCashPriceInEstimatedTWAP = () => {
   const [stat, setStat] = useState<TokenStat>();
-  const tombFinance = useTombFinance();
-  const { slowRefresh } = useRefresh(); 
+  const bombFinance = useTombFinance();
+  const { slowRefresh } = useRefresh();
 
   useEffect(() => {
     async function fetchCashPrice() {
       try {
-        setStat(await tombFinance.getTombStatInEstimatedTWAP());
-      }catch(err) {
+        setStat(await bombFinance.getTombStatInEstimatedTWAP());
+      } catch (err) {
         console.error(err);
       }
     }
     fetchCashPrice();
-  }, [setStat, tombFinance, slowRefresh]);
+  }, [setStat, bombFinance, slowRefresh]);
 
   return stat;
 };

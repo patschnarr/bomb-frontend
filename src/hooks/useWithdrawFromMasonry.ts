@@ -3,17 +3,17 @@ import useTombFinance from './useTombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useWithdrawFromMasonry = () => {
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleWithdraw = useCallback(
     (amount: string) => {
       handleTransactionReceipt(
-        tombFinance.withdrawShareFromMasonry(amount),
-        `Withdraw ${amount} TSHARE from the masonry`,
+        bombFinance.withdrawShareFromMasonry(amount),
+        `Withdraw ${amount} BSHARE from the masonry`,
       );
     },
-    [tombFinance, handleTransactionReceipt],
+    [bombFinance, handleTransactionReceipt],
   );
   return { onWithdraw: handleWithdraw };
 };

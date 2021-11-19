@@ -3,12 +3,12 @@ import useTombFinance from './useTombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useHarvestFromMasonry = () => {
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleReward = useCallback(() => {
-    handleTransactionReceipt(tombFinance.harvestCashFromMasonry(), 'Claim TOMB from Masonry');
-  }, [tombFinance, handleTransactionReceipt]);
+    handleTransactionReceipt(bombFinance.harvestCashFromMasonry(), 'Claim BOMB from Masonry');
+  }, [bombFinance, handleTransactionReceipt]);
 
   return { onReward: handleReward };
 };

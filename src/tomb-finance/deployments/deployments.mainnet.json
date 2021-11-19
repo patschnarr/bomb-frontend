@@ -861,7 +861,7 @@
       }
     ]
   },
-  "tomb": {
+  "bomb": {
     "address": "0x6c021Ae822BEa943b2E66552bDe1D2696a53fbB7",
     "abi": [
       {
@@ -1015,7 +1015,7 @@
       },
       {
         "inputs": [],
-        "name": "INITIAL_TOMB_POOL_DISTRIBUTION",
+        "name": "INITIAL_BOMB_POOL_DISTRIBUTION",
         "outputs": [
           {
             "internalType": "uint256",
@@ -1350,7 +1350,7 @@
       },
       {
         "inputs": [],
-        "name": "tombOracle",
+        "name": "bombOracle",
         "outputs": [
           {
             "internalType": "address",
@@ -1535,7 +1535,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tombOracle",
+            "name": "_bombOracle",
             "type": "address"
           }
         ],
@@ -1714,7 +1714,7 @@
           },
           {
             "internalType": "address",
-            "name": "_tombPool",
+            "name": "_bombPool",
             "type": "address"
           },
           {
@@ -2891,7 +2891,7 @@
           {
             "indexed": false,
             "internalType": "uint256",
-            "name": "tombAmount",
+            "name": "bombAmount",
             "type": "uint256"
           },
           {
@@ -3011,7 +3011,7 @@
           {
             "indexed": false,
             "internalType": "uint256",
-            "name": "tombAmount",
+            "name": "bombAmount",
             "type": "uint256"
           },
           {
@@ -3421,7 +3421,7 @@
       },
       {
         "inputs": [],
-        "name": "tbond",
+        "name": "bbond",
         "outputs": [
           {
             "internalType": "address",
@@ -3434,7 +3434,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "address",
@@ -3447,7 +3447,7 @@
       },
       {
         "inputs": [],
-        "name": "tombOracle",
+        "name": "bombOracle",
         "outputs": [
           {
             "internalType": "address",
@@ -3460,7 +3460,7 @@
       },
       {
         "inputs": [],
-        "name": "tombPriceCeiling",
+        "name": "bombPriceCeiling",
         "outputs": [
           {
             "internalType": "uint256",
@@ -3473,7 +3473,7 @@
       },
       {
         "inputs": [],
-        "name": "tombPriceOne",
+        "name": "bombPriceOne",
         "outputs": [
           {
             "internalType": "uint256",
@@ -3486,7 +3486,7 @@
       },
       {
         "inputs": [],
-        "name": "tshare",
+        "name": "bshare",
         "outputs": [
           {
             "internalType": "address",
@@ -3529,7 +3529,7 @@
         "outputs": [
           {
             "internalType": "uint256",
-            "name": "tombPrice",
+            "name": "bombPrice",
             "type": "uint256"
           }
         ],
@@ -3542,7 +3542,7 @@
         "outputs": [
           {
             "internalType": "uint256",
-            "name": "_tombPrice",
+            "name": "_bombPrice",
             "type": "uint256"
           }
         ],
@@ -3618,22 +3618,22 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "_tbond",
+            "name": "_bbond",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "_tshare",
+            "name": "_bshare",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "_tombOracle",
+            "name": "_bombOracle",
             "type": "address"
           },
           {
@@ -3682,7 +3682,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tombOracle",
+            "name": "_bombOracle",
             "type": "address"
           }
         ],
@@ -3695,7 +3695,7 @@
         "inputs": [
           {
             "internalType": "uint256",
-            "name": "_tombPriceCeiling",
+            "name": "_bombPriceCeiling",
             "type": "uint256"
           }
         ],
@@ -3884,7 +3884,7 @@
         "inputs": [
           {
             "internalType": "uint256",
-            "name": "_tombAmount",
+            "name": "_bombAmount",
             "type": "uint256"
           },
           {
@@ -4244,7 +4244,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -4298,7 +4298,7 @@
         "inputs": [
           {
             "internalType": "contract IERC20",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
@@ -4574,7 +4574,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
@@ -4786,7 +4786,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -4799,7 +4799,7 @@
       },
       {
         "inputs": [],
-        "name": "tombPerSecond",
+        "name": "bombPerSecond",
         "outputs": [
           {
             "internalType": "uint256",
@@ -4935,7 +4935,7 @@
             "type": "address"
           }
         ],
-        "name": "pendingTOMB",
+        "name": "pendingBOMB",
         "outputs": [
           {
             "internalType": "uint256",
@@ -5060,7 +5060,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
@@ -5272,7 +5272,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -5285,7 +5285,7 @@
       },
       {
         "inputs": [],
-        "name": "tombPerSecond",
+        "name": "bombPerSecond",
         "outputs": [
           {
             "internalType": "uint256",
@@ -5421,7 +5421,7 @@
             "type": "address"
           }
         ],
-        "name": "pendingTOMB",
+        "name": "pendingBOMB",
         "outputs": [
           {
             "internalType": "uint256",
@@ -5546,7 +5546,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
@@ -5758,7 +5758,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -5771,7 +5771,7 @@
       },
       {
         "inputs": [],
-        "name": "tombPerSecond",
+        "name": "bombPerSecond",
         "outputs": [
           {
             "internalType": "uint256",
@@ -5907,7 +5907,7 @@
             "type": "address"
           }
         ],
-        "name": "pendingTOMB",
+        "name": "pendingBOMB",
         "outputs": [
           {
             "internalType": "uint256",
@@ -6032,7 +6032,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
@@ -6244,7 +6244,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -6257,7 +6257,7 @@
       },
       {
         "inputs": [],
-        "name": "tombPerSecond",
+        "name": "bombPerSecond",
         "outputs": [
           {
             "internalType": "uint256",
@@ -6393,7 +6393,7 @@
             "type": "address"
           }
         ],
-        "name": "pendingTOMB",
+        "name": "pendingBOMB",
         "outputs": [
           {
             "internalType": "uint256",
@@ -6518,7 +6518,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
@@ -6748,7 +6748,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -6884,7 +6884,7 @@
             "type": "address"
           }
         ],
-        "name": "pendingTOMB",
+        "name": "pendingBOMB",
         "outputs": [
           {
             "internalType": "uint256",
@@ -7009,7 +7009,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
@@ -7239,7 +7239,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -7375,7 +7375,7 @@
             "type": "address"
           }
         ],
-        "name": "pendingTOMB",
+        "name": "pendingBOMB",
         "outputs": [
           {
             "internalType": "uint256",
@@ -7493,14 +7493,14 @@
       }
     ]
   },
-  "TombFtmLPTShareRewardPool": {
+  "TombFtmLPBShareRewardPool": {
     "address": "0xcc0a87F7e7c693042a9Cc703661F5060c80ACb43",
     "abi": [
       {
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tshare",
+            "name": "_bshare",
             "type": "address"
           },
           {
@@ -7672,7 +7672,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "accTSharePerShare",
+            "name": "accBSharePerShare",
             "type": "uint256"
           },
           {
@@ -7738,7 +7738,7 @@
       },
       {
         "inputs": [],
-        "name": "tshare",
+        "name": "bshare",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -7979,14 +7979,14 @@
       }
     ]
   },
-  "TshareFtmLPTShareRewardPool": {
+  "TshareFtmLPBShareRewardPool": {
     "address": "0xcc0a87F7e7c693042a9Cc703661F5060c80ACb43",
     "abi": [
       {
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tshare",
+            "name": "_bshare",
             "type": "address"
           },
           {
@@ -8158,7 +8158,7 @@
           },
           {
             "internalType": "uint256",
-            "name": "accTSharePerShare",
+            "name": "accBSharePerShare",
             "type": "uint256"
           },
           {
@@ -8224,7 +8224,7 @@
       },
       {
         "inputs": [],
-        "name": "tshare",
+        "name": "bshare",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -9268,7 +9268,7 @@
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tombOracle",
+            "name": "_bombOracle",
             "type": "address"
           }
         ],
@@ -9334,7 +9334,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "address",
@@ -10388,24 +10388,24 @@
       }
     ]
   },
-  "TShareSwapper": {
+  "BShareSwapper": {
     "address": "0x2942168Fa8A39d070cB1173a54479F7C6A94604d",
     "abi": [
       {
         "inputs": [
           {
             "internalType": "address",
-            "name": "_tomb",
+            "name": "_bomb",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "_tbond",
+            "name": "_bbond",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "_tshare",
+            "name": "_bshare",
             "type": "address"
           },
           {
@@ -10415,12 +10415,12 @@
           },
           {
             "internalType": "address",
-            "name": "_tombSpookyLpPair",
+            "name": "_bombSpookyLpPair",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "_tshareSpookyLpPair",
+            "name": "_bshareSpookyLpPair",
             "type": "address"
           },
           {
@@ -10482,17 +10482,17 @@
           {
             "indexed": false,
             "internalType": "uint256",
-            "name": "tbondAmount",
+            "name": "bbondAmount",
             "type": "uint256"
           },
           {
             "indexed": false,
             "internalType": "uint256",
-            "name": "tshareAmount",
+            "name": "bshareAmount",
             "type": "uint256"
           }
         ],
-        "name": "TBondSwapPerformed",
+        "name": "BBondSwapPerformed",
         "type": "event"
       },
       {
@@ -10512,11 +10512,11 @@
         "inputs": [
           {
             "internalType": "uint256",
-            "name": "_tbondAmount",
+            "name": "_bbondAmount",
             "type": "uint256"
           }
         ],
-        "name": "estimateAmountOfTShare",
+        "name": "estimateAmountOfBShare",
         "outputs": [
           {
             "internalType": "uint256",
@@ -10535,7 +10535,7 @@
             "type": "address"
           }
         ],
-        "name": "getTBondBalance",
+        "name": "getBBondBalance",
         "outputs": [
           {
             "internalType": "uint256",
@@ -10548,7 +10548,7 @@
       },
       {
         "inputs": [],
-        "name": "getTShareAmountPerTomb",
+        "name": "getBShareAmountPerTomb",
         "outputs": [
           {
             "internalType": "uint256",
@@ -10561,7 +10561,7 @@
       },
       {
         "inputs": [],
-        "name": "getTShareBalance",
+        "name": "getBShareBalance",
         "outputs": [
           {
             "internalType": "uint256",
@@ -10574,7 +10574,7 @@
       },
       {
         "inputs": [],
-        "name": "getTSharePrice",
+        "name": "getBSharePrice",
         "outputs": [
           {
             "internalType": "uint256",
@@ -10648,18 +10648,18 @@
         "inputs": [
           {
             "internalType": "uint256",
-            "name": "_tbondAmount",
+            "name": "_bbondAmount",
             "type": "uint256"
           }
         ],
-        "name": "swapTBondToTShare",
+        "name": "swapBBondToBShare",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
       },
       {
         "inputs": [],
-        "name": "tbond",
+        "name": "bbond",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -10672,7 +10672,7 @@
       },
       {
         "inputs": [],
-        "name": "tomb",
+        "name": "bomb",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -10685,7 +10685,7 @@
       },
       {
         "inputs": [],
-        "name": "tombSpookyLpPair",
+        "name": "bombSpookyLpPair",
         "outputs": [
           {
             "internalType": "address",
@@ -10724,7 +10724,7 @@
       },
       {
         "inputs": [],
-        "name": "tshare",
+        "name": "bshare",
         "outputs": [
           {
             "internalType": "contract IERC20",
@@ -10737,7 +10737,7 @@
       },
       {
         "inputs": [],
-        "name": "tshareSpookyLpPair",
+        "name": "bshareSpookyLpPair",
         "outputs": [
           {
             "internalType": "address",
@@ -10769,7 +10769,7 @@
             "type": "uint256"
           }
         ],
-        "name": "withdrawTShare",
+        "name": "withdrawBShare",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"

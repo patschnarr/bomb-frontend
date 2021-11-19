@@ -1,30 +1,30 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useWallet } from 'use-wallet';
-import TombFinance from '../../tomb-finance';
+import TombFinance from '../../bomb-finance';
 import config from '../../config';
 
 export interface TombFinanceContext {
-  tombFinance?: TombFinance;
+  bombFinance?: TombFinance;
 }
 
-export const Context = createContext<TombFinanceContext>({ tombFinance: null });
+export const Context = createContext<TombFinanceContext>({ bombFinance: null });
 
 export const TombFinanceProvider: React.FC = ({ children }) => {
   const { ethereum, account } = useWallet();
-  const [tombFinance, setTombFinance] = useState<TombFinance>();
+  const [bombFinance, setTombFinance] = useState<TombFinance>();
 
   useEffect(() => {
-    if (!tombFinance) {
-      const tomb = new TombFinance(config);
+    if (!bombFinance) {
+      const bomb = new TombFinance(config);
       if (account) {
         // wallet was unlocked at initialization
-        tomb.unlockWallet(ethereum, account);
+        bomb.unlockWallet(ethereum, account);
       }
-      setTombFinance(tomb);
+      setTombFinance(bomb);
     } else if (account) {
-      tombFinance.unlockWallet(ethereum, account);
+      bombFinance.unlockWallet(ethereum, account);
     }
-  }, [account, ethereum, tombFinance]);
+  }, [account, ethereum, bombFinance]);
 
-  return <Context.Provider value={{ tombFinance }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ bombFinance }}>{children}</Context.Provider>;
 };

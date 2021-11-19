@@ -1,4 +1,4 @@
-# Contributing to [Tomb.Fiance](https://tomb.finance)
+# Contributing to [Tomb.Fiance](https://bomb.money)
 
 🎉 First off all, thanks for taking the time to contribute! 🎉
 

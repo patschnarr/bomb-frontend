@@ -3,13 +3,13 @@ import useTombFinance from './useTombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useRedeemOnMasonry = (description?: string) => {
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleRedeem = useCallback(() => {
-    const alertDesc = description || 'Redeem TSHARE from Masonry';
-    handleTransactionReceipt(tombFinance.exitFromMasonry(), alertDesc);
-  }, [tombFinance, description, handleTransactionReceipt]);
+    const alertDesc = description || 'Redeem BSHARE from Masonry';
+    handleTransactionReceipt(bombFinance.exitFromMasonry(), alertDesc);
+  }, [bombFinance, description, handleTransactionReceipt]);
   return { onRedeem: handleRedeem };
 };
 

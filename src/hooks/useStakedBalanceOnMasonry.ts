@@ -6,12 +6,12 @@ import useRefresh from './useRefresh';
 const useStakedBalanceOnMasonry = () => {
   const { slowRefresh } = useRefresh();
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const tombFinance = useTombFinance();
-  const isUnlocked = tombFinance?.isUnlocked;
+  const bombFinance = useTombFinance();
+  const isUnlocked = bombFinance?.isUnlocked;
   useEffect(() => {
     async function fetchBalance() {
       try {
-        setBalance(await tombFinance.getStakedSharesOnMasonry());
+        setBalance(await bombFinance.getStakedSharesOnMasonry());
       } catch (e) {
         console.error(e);
       }
@@ -19,7 +19,7 @@ const useStakedBalanceOnMasonry = () => {
     if (isUnlocked) {
       fetchBalance();
     }
-  }, [slowRefresh, isUnlocked, tombFinance]);
+  }, [slowRefresh, isUnlocked, bombFinance]);
   return balance;
 };
 

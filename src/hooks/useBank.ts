@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Context as BanksContext } from '../contexts/Banks';
-import { Bank, ContractName } from '../tomb-finance';
+import { Bank, ContractName } from '../bomb-finance';
 
 const useBank = (contractName: ContractName): Bank => {
   const { banks } = useContext(BanksContext);

@@ -4,18 +4,18 @@ import useStakedBalanceOnMasonry from './useStakedBalanceOnMasonry';
 
 const useMasonryVersion = () => {
   const [masonryVersion, setMasonryVersion] = useState('latest');
-  const tombFinance = useTombFinance();
+  const bombFinance = useTombFinance();
   const stakedBalance = useStakedBalanceOnMasonry();
 
   const updateState = useCallback(async () => {
-    setMasonryVersion(await tombFinance.fetchMasonryVersionOfUser());
-  }, [tombFinance?.isUnlocked, stakedBalance]);
+    setMasonryVersion(await bombFinance.fetchMasonryVersionOfUser());
+  }, [bombFinance?.isUnlocked, stakedBalance]);
 
   useEffect(() => {
-    if (tombFinance?.isUnlocked) {
+    if (bombFinance?.isUnlocked) {
       updateState().catch((err) => console.error(err.stack));
     }
-  }, [tombFinance?.isUnlocked, stakedBalance]);
+  }, [bombFinance?.isUnlocked, stakedBalance]);
 
   return masonryVersion;
 };
