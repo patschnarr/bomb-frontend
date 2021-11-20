@@ -1,5 +1,5 @@
 import { Deployments } from './deployments';
-import { ChainId } from '@spookyswap/sdk';
+import { ChainId } from '@pancakeswap/sdk';
 
 export type Configuration = {
   chainId: ChainId;

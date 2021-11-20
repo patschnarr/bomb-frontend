@@ -316,8 +316,6 @@ export class TombFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.BOMB, true);
       } else if (tokenName === 'BSHARE-FTM-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.BSHARE, false);
-      } else if (tokenName === 'SHIBA') {
-        tokenPrice = await this.getTokenPriceFromSpiritswap(token);
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -503,29 +501,29 @@ export class TombFinance {
     }
   }
 
-  async getTokenPriceFromSpiritswap(tokenContract: ERC20): Promise<string> {
-    const ready = await this.provider.ready;
-    if (!ready) return;
-    const { chainId } = this.config;
+  // async getTokenPriceFromSpiritswap(tokenContract: ERC20): Promise<string> {
+  //   const ready = await this.provider.ready;
+  //   if (!ready) return;
+  //   const { chainId } = this.config;
 
-    const { WBNB } = this.externalTokens;
+  //   const { WBNB } = this.externalTokens;
 
-    const wftm = new TokenSpirit(chainId, WBNB.address, WBNB.decimal);
-    const token = new TokenSpirit(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
-    try {
-      const wftmToToken = await FetcherSpirit.fetchPairData(wftm, token, this.provider);
-      const liquidityToken = wftmToToken.liquidityToken;
-      let ftmBalanceInLP = await WBNB.balanceOf(liquidityToken.address);
-      let ftmAmount = Number(getFullDisplayBalance(ftmBalanceInLP, WBNB.decimal));
-      let shibaBalanceInLP = await tokenContract.balanceOf(liquidityToken.address);
-      let shibaAmount = Number(getFullDisplayBalance(shibaBalanceInLP, tokenContract.decimal));
-      const priceOfOneFtmInDollars = await this.getWBNBPriceFromPancakeswap();
-      let priceOfShiba = (ftmAmount / shibaAmount) * Number(priceOfOneFtmInDollars);
-      return priceOfShiba.toString();
-    } catch (err) {
-      console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
-    }
-  }
+  //   const wftm = new TokenSpirit(chainId, WBNB.address, WBNB.decimal);
+  //   const token = new TokenSpirit(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+  //   try {
+  //     const wftmToToken = await FetcherSpirit.fetchPairData(wftm, token, this.provider);
+  //     const liquidityToken = wftmToToken.liquidityToken;
+  //     let ftmBalanceInLP = await WBNB.balanceOf(liquidityToken.address);
+  //     let ftmAmount = Number(getFullDisplayBalance(ftmBalanceInLP, WBNB.decimal));
+  //     let shibaBalanceInLP = await tokenContract.balanceOf(liquidityToken.address);
+  //     let shibaAmount = Number(getFullDisplayBalance(shibaBalanceInLP, tokenContract.decimal));
+  //     const priceOfOneFtmInDollars = await this.getWBNBPriceFromPancakeswap();
+  //     let priceOfShiba = (ftmAmount / shibaAmount) * Number(priceOfOneFtmInDollars);
+  //     return priceOfShiba.toString();
+  //   } catch (err) {
+  //     console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
+  //   }
+  // }
 
   async getWBNBPriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;

@@ -33,11 +33,11 @@ const configurations: { [env: string]: Configuration } = {
     deployments: require('./bomb-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       WBNB: ['0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83', 18],
-      //  FUSDT: ['0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6], // This is actually usdc on mainnet not fusdt
-      //  BOO: ['0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE', 18],
-      //   ZOO: ['0x09e145a1d53c0045f41aeef25d8ff982ae74dd56', 0],
-      //   SHIBA: ['0x9ba3e4f84a34df4e08c112e1a0ff148b81655615', 9],
-      //  'BOMB-BNB-LP': ['0x2b4C76d0dc16BE1C31D4C1DC53bF9B45987Fc75c', 18],
+      FUSDT: ['0x04068DA6C83AFCFA0e13ba15A6696662335D5B75', 6], // This is actually usdc on mainnet not fusdt
+      BOO: ['0x841FAD6EAe12c286d1Fd18d1d525DFfA75C7EFFE', 18],
+      ZOO: ['0x09e145a1d53c0045f41aeef25d8ff982ae74dd56', 0],
+      SHIBA: ['0x9ba3e4f84a34df4e08c112e1a0ff148b81655615', 9],
+      'BOMB-BNB-LP': ['0x2b4C76d0dc16BE1C31D4C1DC53bF9B45987Fc75c', 18],
       'BOMB-BTCB-LP': ['0x2A651563C9d3Af67aE0388a5c8F89b867038089e', 18],
       'BSHARE-BNB-LP': ['0x1303246855b5B5EbC71F049Fdb607494e97218f8', 18],
     },

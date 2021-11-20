@@ -60,7 +60,7 @@ const ProvideLiquidity = () => {
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setFtmAmount(e.currentTarget.value);
-    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'FTM');
+    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'BTCB');
     setTombAmount(quoteFromSpooky);
 
     setLpTokensAmount(quoteFromSpooky / bombLPStats.tokenAmount);
@@ -87,7 +87,7 @@ const ProvideLiquidity = () => {
       <Grid container justify="center">
         <Box style={{ width: '600px' }}>
           <Alert variant="filled" severity="warning" style={{ marginBottom: '10px' }}>
-            <b>This and <a href="https://spookyswap.finance/" rel="noopener noreferrer" target="_blank">Spookyswap</a> are the only ways to provide Liquidity on BOMB-FTM pair without paying tax.</b>
+            <b>This and <a href="https://pancakeswap.finance/" rel="noopener noreferrer" target="_blank">Pancakeswap</a> are the only ways to provide Liquidity on BOMB-BTCB pair without paying tax.</b>
           </Alert>
           <Grid item xs={12} sm={12}>
             <Paper>
@@ -110,7 +110,7 @@ const ProvideLiquidity = () => {
                           onChange={handleFtmChange}
                           value={ftmAmount}
                           max={ftmBalance}
-                          symbol={'FTM'}
+                          symbol={'BTCB'}
                         ></TokenInput>
                       </Grid>
                       <Grid item xs={12}>
