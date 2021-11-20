@@ -1,14 +1,14 @@
 import React from 'react';
 
 //Graveyard ecosystem logos
-import bombLogo from '../../assets/img/crypto_bomb_cash.svg';
-import tShareLogo from '../../assets/img/crypto_bomb_share.svg';
-import bombLogoPNG from '../../assets/img/crypto_bomb_cash.f2b44ef4.png';
-import tShareLogoPNG from '../../assets/img/crypto_bomb_share.bf1a6c52.png';
-import tBondLogo from '../../assets/img/crypto_bomb_bond.svg';
+import bombLogo from '../../assets/img/crypto_tomb_cash.svg';
+import tShareLogo from '../../assets/img/crypto_tomb_share.svg';
+import bombLogoPNG from '../../assets/img/crypto_tomb_cash.f2b44ef4.png';
+import tShareLogoPNG from '../../assets/img/crypto_tomb_share.bf1a6c52.png';
+import tBondLogo from '../../assets/img/crypto_tomb_bond.svg';
 
-import bombFtmLpLogo from '../../assets/img/bomb_ftm_lp.png';
-import bshareFtmLpLogo from '../../assets/img/bshare_ftm_lp.png';
+import bombFtmLpLogo from '../../assets/img/tomb_ftm_lp.png';
+import bshareFtmLpLogo from '../../assets/img/tshare_ftm_lp.png';
 
 import wftmLogo from '../../assets/img/ftm_logo_blue.svg';
 import booLogo from '../../assets/img/spooky.png';
@@ -23,7 +23,7 @@ const logosBySymbol: { [title: string]: string } = {
   BSHAREPNG: tShareLogoPNG,
   BSHARE: tShareLogo,
   BBOND: tBondLogo,
-  WFTM: wftmLogo,
+  WBNB: wftmLogo,
   BOO: booLogo,
   SHIBA: shibaLogo,
   ZOO: zooLogo,

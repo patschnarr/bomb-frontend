@@ -107,17 +107,17 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName.includes('BOMB')) {
-    pairName = 'BOMB-FTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + bombAddr;
+    pairName = 'BOMB-BTC pair';
+    uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
   } else {
-    pairName = 'BSHARE-FTM pair';
-    uniswapUrl = 'https://spookyswap.finance/add/FTM/' + bshareAddr;
+    pairName = 'BSHARE-BNB pair';
+    uniswapUrl = 'https://pancakeswap.finance/add/BNB/' + bshareAddr;
   }
   return (
     <Card>
       <CardContent>
         <StyledLink href={uniswapUrl} target="_blank">
-          {`👻 Provide liquidity for ${pairName} now on SpookySwap 👻`}
+          {`Provide liquidity for ${pairName} now on PancakeSwap`}
         </StyledLink>
       </CardContent>
     </Card>

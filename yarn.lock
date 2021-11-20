@@ -2637,6 +2637,19 @@
     truffle-flattener "^1.4.4"
     truffle-hdwallet-provider "^1.0.17"
 
+"@pancakeswap/sdk@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@pancakeswap/sdk/-/sdk-2.4.0.tgz#5da040384419cb45ea2b6eee8104d05914e8bd28"
+  integrity sha512-c5cLOMVa/dlbVbURPpSY6oNSYm61xN5NgfoYCXY88NisHbgLWd/MNHoM98XjgeJFs7OlKcf4G7nui4XGM9lDSA==
+  dependencies:
+    "@pancakeswap-libs/pancake-swap-core" "^0.1.0"
+    big.js "^5.2.2"
+    decimal.js-light "^2.5.0"
+    jsbi "^3.1.1"
+    tiny-invariant "^1.1.0"
+    tiny-warning "^1.0.3"
+    toformat "^2.0.0"
+
 "@portis/web3-provider-engine@1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@portis/web3-provider-engine/-/web3-provider-engine-1.1.2.tgz#97f383156ea6b70fba69ae93a945fdd94159b1ba"

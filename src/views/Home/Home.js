@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import Page from '../../components/Page';
 import HomeImage from '../../assets/img/home.png';
-import CashImage from '../../assets/img/crypto_bomb_cash.svg';
+import CashImage from '../../assets/img/crypto_tomb_cash.svg';
 import Image from 'material-ui-image';
 import styled from 'styled-components';
 import { Alert } from '@material-ui/lab';
@@ -16,8 +16,8 @@ import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
 import usetShareStats from '../../hooks/usetShareStats';
 import useTotalValueLocked from '../../hooks/useTotalValueLocked';
-import { bomb as bombTesting, tShare as tShareTesting } from '../../bomb-finance/deployments/deployments.testing.json';
-import { bomb as bombProd, tShare as tShareProd } from '../../bomb-finance/deployments/deployments.mainnet.json';
+import { Bomb as bombTesting, BShare as tShareTesting } from '../../bomb-finance/deployments/deployments.testing.json';
+import { Bomb as bombProd, BShare as tShareProd } from '../../bomb-finance/deployments/deployments.mainnet.json';
 
 import MetamaskFox from '../../assets/img/metamask-fox.svg';
 
@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStats('BOMB-FTM-LP');
-  const tShareFtmLpStats = useLpStats('BSHARE-FTM-LP');
+  const bombFtmLpStats = useLpStats('BOMB-BTC-LP');
+  const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
   const bombStats = useTombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();

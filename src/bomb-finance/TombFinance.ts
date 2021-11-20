@@ -1,6 +1,6 @@
 // import { Fetcher, Route, Token } from '@uniswap/sdk';
 import { Fetcher as FetcherSpirit, Token as TokenSpirit } from '@spiritswap/sdk';
-import { Fetcher, Route, Token } from '@spookyswap/sdk';
+import { Fetcher, Route, Token } from '@pancakeswap/sdk';
 import { Configuration } from './config';
 import { ContractName, TokenStat, AllocationTime, LPStat, Bank, PoolStats, BShareSwapperStat } from './types';
 import { BigNumber, Contract, ethers, EventFilter } from 'ethers';
@@ -27,7 +27,7 @@ export class TombFinance {
   externalTokens: { [name: string]: ERC20 };
   masonryVersionOfUser?: string;
 
-  BOMBWFTM_LP: Contract;
+  BOMBWBNB_LP: Contract;
   BOMB: ERC20;
   BSHARE: ERC20;
   BBOND: ERC20;
@@ -46,13 +46,13 @@ export class TombFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
     }
-    this.BOMB = new ERC20(deployments.bomb.address, provider, 'BOMB');
-    this.BSHARE = new ERC20(deployments.tShare.address, provider, 'BSHARE');
-    this.BBOND = new ERC20(deployments.tBond.address, provider, 'BBOND');
-    this.FTM = this.externalTokens['WFTM'];
+    this.BOMB = new ERC20(deployments.Bomb.address, provider, 'BOMB');
+    this.BSHARE = new ERC20(deployments.BShare.address, provider, 'BSHARE');
+    this.BBOND = new ERC20(deployments.BBond.address, provider, 'BBOND');
+    this.FTM = this.externalTokens['WBNB'];
 
     // Uniswap V2 Pair
-    this.BOMBWFTM_LP = new Contract(externalTokens['BOMB-FTM-LP'][0], IUniswapV2PairABI, provider);
+    this.BOMBWBNB_LP = new Contract(externalTokens['BOMB-FTM-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -73,7 +73,7 @@ export class TombFinance {
     for (const token of tokens) {
       token.connect(this.signer);
     }
-    this.BOMBWFTM_LP = this.BOMBWFTM_LP.connect(this.signer);
+    this.BOMBWBNB_LP = this.BOMBWBNB_LP.connect(this.signer);
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
     this.fetchMasonryVersionOfUser()
       .then((version) => (this.masonryVersionOfUser = version))
@@ -104,7 +104,7 @@ export class TombFinance {
       .sub(bombRewardPoolSupply2)
       .sub(bombRewardPoolSupplyOld);
     const priceInFTM = await this.getTokenPriceFromPancakeswap(this.BOMB);
-    const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
+    const priceOfOneFTM = await this.getWBNBPriceFromPancakeswap();
     const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
 
     return {
@@ -184,7 +184,7 @@ export class TombFinance {
     const priceInFTM = await this.getTokenPriceFromPancakeswap(this.BSHARE);
     const bombRewardPoolSupply = await this.BSHARE.balanceOf(TombFtmLPBShareRewardPool.address);
     const tShareCirculatingSupply = supply.sub(bombRewardPoolSupply);
-    const priceOfOneFTM = await this.getWFTMPriceFromPancakeswap();
+    const priceOfOneFTM = await this.getWBNBPriceFromPancakeswap();
     const priceOfSharesInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
 
     return {
@@ -271,7 +271,7 @@ export class TombFinance {
     if (earnTokenName === 'BOMB') {
       if (!contractName.endsWith('TombRewardPool')) {
         const rewardPerSecond = await poolContract.bombPerSecond();
-        if (depositTokenName === 'WFTM') {
+        if (depositTokenName === 'WBNB') {
           return rewardPerSecond.mul(6000).div(11000).div(24);
         } else if (depositTokenName === 'BOO') {
           return rewardPerSecond.mul(2500).div(11000).div(24);
@@ -308,8 +308,8 @@ export class TombFinance {
    */
   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
-    const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
-    if (tokenName === 'WFTM') {
+    const priceOfOneFtmInDollars = await this.getWBNBPriceFromPancakeswap();
+    if (tokenName === 'WBNB') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
       if (tokenName === 'BOMB-FTM-LP') {
@@ -488,11 +488,11 @@ export class TombFinance {
   async getTokenPriceFromPancakeswap(tokenContract: ERC20): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { chainId } = this.config;
-    const { WFTM } = this.config.externalTokens;
+    // const { chainId } = this.config;
+    const { WBNB } = this.config.externalTokens;
 
-    const wftm = new Token(chainId, WFTM[0], WFTM[1]);
-    const token = new Token(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+    const wftm = new Token(56, WBNB[0], WBNB[1]);
+    const token = new Token(56, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
       const priceInBUSD = new Route([wftmToToken], token);
@@ -508,18 +508,18 @@ export class TombFinance {
     if (!ready) return;
     const { chainId } = this.config;
 
-    const { WFTM } = this.externalTokens;
+    const { WBNB } = this.externalTokens;
 
-    const wftm = new TokenSpirit(chainId, WFTM.address, WFTM.decimal);
+    const wftm = new TokenSpirit(chainId, WBNB.address, WBNB.decimal);
     const token = new TokenSpirit(chainId, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
       const wftmToToken = await FetcherSpirit.fetchPairData(wftm, token, this.provider);
       const liquidityToken = wftmToToken.liquidityToken;
-      let ftmBalanceInLP = await WFTM.balanceOf(liquidityToken.address);
-      let ftmAmount = Number(getFullDisplayBalance(ftmBalanceInLP, WFTM.decimal));
+      let ftmBalanceInLP = await WBNB.balanceOf(liquidityToken.address);
+      let ftmAmount = Number(getFullDisplayBalance(ftmBalanceInLP, WBNB.decimal));
       let shibaBalanceInLP = await tokenContract.balanceOf(liquidityToken.address);
       let shibaAmount = Number(getFullDisplayBalance(shibaBalanceInLP, tokenContract.decimal));
-      const priceOfOneFtmInDollars = await this.getWFTMPriceFromPancakeswap();
+      const priceOfOneFtmInDollars = await this.getWBNBPriceFromPancakeswap();
       let priceOfShiba = (ftmAmount / shibaAmount) * Number(priceOfOneFtmInDollars);
       return priceOfShiba.toString();
     } catch (err) {
@@ -527,19 +527,19 @@ export class TombFinance {
     }
   }
 
-  async getWFTMPriceFromPancakeswap(): Promise<string> {
+  async getWBNBPriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { WFTM, FUSDT } = this.externalTokens;
+    const { WBNB, FUSDT } = this.externalTokens;
     try {
       const fusdt_wftm_lp_pair = this.externalTokens['USDT-FTM-LP'];
-      let ftm_amount_BN = await WFTM.balanceOf(fusdt_wftm_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WFTM.decimal));
+      let ftm_amount_BN = await WBNB.balanceOf(fusdt_wftm_lp_pair.address);
+      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WBNB.decimal));
       let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_wftm_lp_pair.address);
       let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, FUSDT.decimal));
       return (fusdt_amount / ftm_amount).toString();
     } catch (err) {
-      console.error(`Failed to fetch token price of WFTM: ${err}`);
+      console.error(`Failed to fetch token price of WBNB: ${err}`);
     }
   }
 
@@ -763,7 +763,7 @@ export class TombFinance {
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {
     const { SpookyRouter } = this.contracts;
-    const { _reserve0, _reserve1 } = await this.BOMBWFTM_LP.getReserves();
+    const { _reserve0, _reserve1 } = await this.BOMBWBNB_LP.getReserves();
     let quote;
     if (tokenName === 'BOMB') {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve1, _reserve0);
