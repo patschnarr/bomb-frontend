@@ -11,6 +11,7 @@ import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
 import useBombStats from '../../hooks/useBombStats';
 import useLpStats from '../../hooks/useLpStats';
+import useLpStatsBTC from '../../hooks/useLpStatsBTC';
 import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStats('BOMB-BTCB-LP');
+  const bombFtmLpStats = useLpStatsBTC('BOMB-BTCB-LP');
   const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
   const bombStats = useBombStats();
   const tShareStats = usetShareStats();

@@ -143,6 +143,30 @@ export class BombFinance {
     };
   }
 
+  async getLPStatBTC(name: string): Promise<LPStat> {
+    const lpToken = this.externalTokens[name];
+    const lpTokenSupplyBN = await lpToken.totalSupply();
+    const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
+    const token0 = name.startsWith('bomb') ? this.BOMB : this.BSHARE;
+    const isBomb = name.startsWith('bomb');
+    const tokenAmountBN = await token0.balanceOf(lpToken.address);
+    const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
+
+    const btcAmountBN = await this.BTC.balanceOf(lpToken.address);
+    const btcAmount = getDisplayBalance(btcAmountBN, 18);
+    const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
+    const ftmAmountInOneLP = Number(btcAmount) / Number(lpTokenSupply);
+    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isBomb);
+    const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
+    const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
+    return {
+      tokenAmount: tokenAmountInOneLP.toFixed(2).toString(),
+      ftmAmount: ftmAmountInOneLP.toFixed(2).toString(),
+      priceOfOne: lpTokenPriceFixed,
+      totalLiquidity: liquidity,
+      totalSupply: Number(lpTokenSupply).toFixed(2).toString(),
+    };
+  }
   /**
    * Use this method to get price for Bomb
    * @returns TokenStat for BBOND
