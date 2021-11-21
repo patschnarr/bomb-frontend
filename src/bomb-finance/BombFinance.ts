@@ -102,13 +102,16 @@ export class BombFinance {
     const bombRewardPoolSupply2 = await this.BOMB.balanceOf(BombRewardPool.address);
     const bombCirculatingSupply = supply.sub(bombRewardPoolSupply).sub(bombRewardPoolSupply2);
     const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BOMB);
+    const priceInBTC = await this.getTokenPriceFromPancakeswapBTC(this.BOMB);
+    console.log('PriceInBTC', priceInBTC);
     const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
     const priceOfOneBTC = await this.getBTCBPriceFromPancakeswap();
 
     const priceOfBombInDollars = (Number(priceInBNB) * Number(priceOfOneBNB)).toFixed(2);
 
     return {
-      tokenInFtm: (Number(priceInBNB) * 100).toString(),
+      //  tokenInFtm: (Number(priceInBNB) * 100).toString(),
+      tokenInFtm: priceInBTC.toString(),
       priceInDollars: priceOfBombInDollars,
       totalSupply: getDisplayBalance(supply, this.BOMB.decimal, 0),
       circulatingSupply: getDisplayBalance(bombCirculatingSupply, this.BOMB.decimal, 0),
@@ -537,16 +540,17 @@ export class BombFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
     //const { chainId } = this.config;
-    const { BTCB } = this.config.externalTokens;
+    const { BTCB, WBNB } = this.config.externalTokens;
 
-    //   const wftm = new Token(56, BTCB[0], BTCB[1]);
-    const wftm = new Token(56, this.BTC.address, this.BTC.decimal, this.BTC.symbol, 'BTCB');
+    const wbnb = new Token(56, WBNB[0], WBNB[1]);
+    const btcb = new Token(56, this.BTC.address, this.BTC.decimal, 'BTCB', 'BTCB');
     const token = new Token(56, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
-      const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
+      const wftmToToken = await Fetcher.fetchPairData(btcb, token, this.provider);
       const priceInBUSD = new Route([wftmToToken], token);
-      console.log('priceInBUSDBTC', priceInBUSD);
-      return priceInBUSD.midPrice.toFixed(4);
+      const priceForPeg = Number(priceInBUSD.midPrice.toFixed(12)) * 10000;
+      // console.log('priceInBUSDBTC', priceInBUSD.midPrice.toFixed(12));
+      return priceForPeg.toFixed(4);
     } catch (err) {
       console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
     }
