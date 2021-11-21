@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStats('BOMB-BNB-LP');
+  const bombFtmLpStats = useLpStats('BOMB-BTCB-LP');
   const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
   const bombStats = useBombStats();
   const tShareStats = usetShareStats();
@@ -100,7 +100,7 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const bombLpZap = useZap({ depositTokenName: 'BOMB-BTC-LP' });
+  const bombLpZap = useZap({ depositTokenName: 'BOMB-BTCB-LP' });
   const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-LP' });
 
   const StyledLink = styled.a`
@@ -116,7 +116,7 @@ const Home = () => {
         bombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBombZap();
       }}
-      tokenName={'BOMB-BTC-LP'}
+      tokenName={'BOMB-BTCB-LP'}
     />,
   );
 
@@ -139,7 +139,7 @@ const Home = () => {
         {/* Logo */}
         <Grid container item xs={12} sm={4} justify="center">
           {/* <Paper>xs=6 sm=3</Paper> */}
-          <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={CashImage} />
+          {/* <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={CashImage} /> */}
         </Grid>
         {/* Explanation text */}
         <Grid item xs={12} sm={8}>
@@ -158,14 +158,14 @@ const Home = () => {
 
         </Grid>
 
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
             <Alert variant="filled" severity="warning">
               <b>
                 Please visit our <StyledLink target="_blank" href="https://docs.bomb.money">documentation</StyledLink> before purchasing BOMB or BSHARE!</b>
             </Alert>
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* TVL */}
         <Grid item xs={12} sm={4}>
@@ -320,10 +320,10 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BOMB-BNB Spooky LP</h2>
+              <h2>BOMB-BTCB PancakeSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="BOMB-BNB-LP" />
+                  <TokenSymbol symbol="BOMB-BTCB-LP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>
@@ -334,7 +334,7 @@ const Home = () => {
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {bombLPStats?.tokenAmount ? bombLPStats?.tokenAmount : '-.--'} BOMB /{' '}
-                  {bombLPStats?.ftmAmount ? bombLPStats?.ftmAmount : '-.--'} BNB
+                  {bombLPStats?.ftmAmount ? bombLPStats?.ftmAmount : '-.--'} BTCB
                 </span>
               </Box>
               <Box>${bombLPStats?.priceOfOne ? bombLPStats.priceOfOne : '-.--'}</Box>
@@ -348,7 +348,7 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BSHARE-BNB Spooky LP</h2>
+              <h2>BSHARE-BNB PancakeSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
                   <TokenSymbol symbol="BSHARE-BNB-LP" />

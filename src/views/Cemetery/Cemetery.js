@@ -59,7 +59,7 @@ const Cemetery = () => {
                     Earn BOMB by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    All below pools have ended. Please unstake and collect your rewards.
+                    Below pools are in full effect until the system starts December 1st.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks

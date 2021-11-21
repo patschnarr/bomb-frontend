@@ -54,7 +54,7 @@ export class BombFinance {
     this.BTC = this.externalTokens['BTCB'];
 
     // Uniswap V2 Pair
-    this.BOMBBTC_LP = new Contract(externalTokens['BOMB-BTC-LP'][0], IUniswapV2PairABI, provider);
+    this.BOMBBTC_LP = new Contract(externalTokens['BOMB-BTCB-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -289,7 +289,7 @@ export class BombFinance {
       return await poolContract.epochBombPerSecond(0);
     }
     const rewardPerSecond = await poolContract.tSharePerSecond();
-    if (depositTokenName.startsWith('BOMB')) {
+    if (depositTokenName.startsWith('bomb')) {
       return rewardPerSecond.mul(35500).div(59500);
     } else {
       return rewardPerSecond.mul(24000).div(59500);
@@ -310,7 +310,7 @@ export class BombFinance {
     if (tokenName === 'WBNB') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
-      if (tokenName === 'BOMB-BNB-LP') {
+      if (tokenName === 'BOMB-BTCB-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.BOMB, true);
       } else if (tokenName === 'BSHARE-BNB-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.BSHARE, false);
@@ -536,6 +536,22 @@ export class BombFinance {
       return (fusdt_amount / ftm_amount).toString();
     } catch (err) {
       console.error(`Failed to fetch token price of WBNB: ${err}`);
+    }
+  }
+
+  async getBTCBPriceFromPancakeswap(): Promise<string> {
+    const ready = await this.provider.ready;
+    if (!ready) return;
+    const { BTCB, FUSDT } = this.externalTokens;
+    try {
+      const fusdt_btcb_lp_pair = this.externalTokens['USDT-BTCB-LP'];
+      let ftm_amount_BN = await BTCB.balanceOf(fusdt_btcb_lp_pair.address);
+      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, BTCB.decimal));
+      let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_btcb_lp_pair.address);
+      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, FUSDT.decimal));
+      return (fusdt_amount / ftm_amount).toString();
+    } catch (err) {
+      console.error(`Failed to fetch token price of BTCB: ${err}`);
     }
   }
 

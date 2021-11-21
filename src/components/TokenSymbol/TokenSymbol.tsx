@@ -30,9 +30,11 @@ const logosBySymbol: { [title: string]: string } = {
   CAKE: bombLogo,
     SUSD: bombLogo,
   SBTC:bombLogo,
-    BTCB: bombLogo,
+  BTCB: bombLogo,
+  BTC: bombLogo,
+        SVL: bombLogo,
   'BOMB-BNB-LP': bombFtmLpLogo,
-    'BOMB-BTC-LP': bombFtmLpLogo,
+    'BOMB-BTCB-LP': bombFtmLpLogo,
   'BSHARE-BNB-LP': bshareFtmLpLogo,
 };
 
