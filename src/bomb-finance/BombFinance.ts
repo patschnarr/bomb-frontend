@@ -147,8 +147,8 @@ export class BombFinance {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
-    const token0 = name.startsWith('bomb') ? this.BOMB : this.BSHARE;
-    const isBomb = name.startsWith('bomb');
+    const token0 = name.startsWith('BOMB') ? this.BOMB : this.BSHARE;
+    const isBomb = name.startsWith('BOMB');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
