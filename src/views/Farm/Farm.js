@@ -44,7 +44,7 @@ const Farm = () => {
                     Earn BSHARE by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    BShare farms begin producing rewards: November 25 23:00 UTC
+                    BShare farms begin producing rewards: November 25 23:00 UTC and continue for 365 days.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -62,7 +62,7 @@ const Farm = () => {
                     Earn BOMB by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    Bomb reward pools start November 21st 23:00 UTC
+                    Bomb reward pools start November 21st 23:00 UTC and will go on for 9 days.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks

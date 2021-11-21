@@ -149,7 +149,7 @@ const Home = () => {
                   <strong>Genesis Farm:</strong> Nov 20 23:00 - 24 hrs
                 </li>
                 <li>
-                  <strong>Bomb Farm:</strong> Nov 21 23:00 - 5 days
+                  <strong>Bomb Farm:</strong> Nov 21 23:00 - 9 days
                 </li>
                 <li>
                   <strong>BSHARE Farm:</strong> Nov 25 23:00 - 365 days
