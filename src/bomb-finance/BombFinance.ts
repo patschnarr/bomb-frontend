@@ -108,7 +108,7 @@ export class BombFinance {
     const priceOfBombInDollars = (Number(priceInBNB) * Number(priceOfOneBNB)).toFixed(2);
 
     return {
-      tokenInFtm: priceInBNB,
+      tokenInFtm: (Number(priceInBNB) * 100).toString(),
       priceInDollars: priceOfBombInDollars,
       totalSupply: getDisplayBalance(supply, this.BOMB.decimal, 0),
       circulatingSupply: getDisplayBalance(bombCirculatingSupply, this.BOMB.decimal, 0),
@@ -157,13 +157,21 @@ export class BombFinance {
     const btcAmountBN = await this.BTC.balanceOf(lpToken.address);
     const btcAmount = getDisplayBalance(btcAmountBN, 18);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
+    console.log('tokenAmountInOneLP:', tokenAmountInOneLP);
     const ftmAmountInOneLP = Number(btcAmount) / Number(lpTokenSupply);
+    console.log('ftmAmountInOneLP:', ftmAmountInOneLP);
     const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isBomb);
+    console.log('lpTokenPrice:', lpTokenPrice);
+
     const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
+    console.log('lpTokenPriceFixed:', lpTokenPriceFixed);
+
     const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
+    console.log('liquidity:', liquidity);
+
     return {
       tokenAmount: tokenAmountInOneLP.toFixed(2).toString(),
-      ftmAmount: ftmAmountInOneLP.toFixed(2).toString(),
+      ftmAmount: ftmAmountInOneLP.toFixed(5).toString(),
       priceOfOne: lpTokenPriceFixed,
       totalLiquidity: liquidity,
       totalSupply: Number(lpTokenSupply).toFixed(2).toString(),
@@ -297,11 +305,11 @@ export class BombFinance {
         const rewardPerSecond = await poolContract.bombPerSecond();
         if (depositTokenName === 'WBNB') {
           return rewardPerSecond.mul(6000).div(11000).div(24);
-        } else if (depositTokenName === 'BOO') {
+        } else if (depositTokenName === 'CAKE') {
           return rewardPerSecond.mul(2500).div(11000).div(24);
-        } else if (depositTokenName === 'ZOO') {
+        } else if (depositTokenName === 'SUSD') {
           return rewardPerSecond.mul(1000).div(11000).div(24);
-        } else if (depositTokenName === 'SHIBA') {
+        } else if (depositTokenName === 'SVL') {
           return rewardPerSecond.mul(1500).div(11000).div(24);
         }
         return rewardPerSecond.div(24);
@@ -315,10 +323,10 @@ export class BombFinance {
       return await poolContract.epochBombPerSecond(0);
     }
     const rewardPerSecond = await poolContract.tSharePerSecond();
-    if (depositTokenName.startsWith('bomb')) {
-      return rewardPerSecond.mul(35500).div(59500);
+    if (depositTokenName.startsWith('BOMB')) {
+      return rewardPerSecond.mul(29750).div(59500);
     } else {
-      return rewardPerSecond.mul(24000).div(59500);
+      return rewardPerSecond.mul(29750).div(59500);
     }
   }
 
@@ -518,7 +526,26 @@ export class BombFinance {
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
       const priceInBUSD = new Route([wftmToToken], token);
+      console.log('priceInBUSD', priceInBUSD);
+      return priceInBUSD.midPrice.toFixed(4);
+    } catch (err) {
+      console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
+    }
+  }
 
+  async getTokenPriceFromPancakeswapBTC(tokenContract: ERC20): Promise<string> {
+    const ready = await this.provider.ready;
+    if (!ready) return;
+    //const { chainId } = this.config;
+    const { BTCB } = this.config.externalTokens;
+
+    //   const wftm = new Token(56, BTCB[0], BTCB[1]);
+    const wftm = new Token(56, this.BTC.address, this.BTC.decimal, this.BTC.symbol, 'BTCB');
+    const token = new Token(56, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
+    try {
+      const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
+      const priceInBUSD = new Route([wftmToToken], token);
+      console.log('priceInBUSDBTC', priceInBUSD);
       return priceInBUSD.midPrice.toFixed(4);
     } catch (err) {
       console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
@@ -762,13 +789,13 @@ export class BombFinance {
       let assetUrl;
       if (assetName === 'BOMB') {
         asset = this.BOMB;
-        assetUrl = 'https://bomb.money/presskit/bomb_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/logo_tomb_CircleBlack.png';
       } else if (assetName === 'BSHARE') {
         asset = this.BSHARE;
-        assetUrl = 'https://bomb.money/presskit/bshare_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/logo_tomb_share_BlackCircle.png';
       } else if (assetName === 'BBOND') {
         asset = this.BBOND;
-        assetUrl = 'https://bomb.money/presskit/bbond_icon_noBG.png';
+        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/logo_tomb_bond_CircleBlack.png';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
@@ -808,7 +835,7 @@ export class BombFinance {
     } else {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve0, _reserve1);
     }
-    return (quote / 1e18).toString();
+    return (quote / 1e14).toString();
   }
 
   /**

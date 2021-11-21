@@ -154,9 +154,7 @@ const Home = () => {
                 <li>
                   <strong>BSHARE Farm:</strong> Nov 25 23:00 - 365 days
                 </li>
-                <li>
-                  <strong>Boardroom Start:</strong> Dec 1 00:00
-                </li>
+
               </ul>
             </Box>
           </Paper>
@@ -248,13 +246,13 @@ const Home = () => {
                   <TokenSymbol symbol="BOMB" />
                 </CardIcon>
               </Box>
-              Current Price
+              10,000 BOMB Needs 1.0 Peg:
               <Box>
-                <span style={{ fontSize: '30px' }}>{bombPriceInBNB ? bombPriceInBNB : '-.----'} BNB</span>
+                <span style={{ fontSize: '30px' }}>{bombPriceInBNB ? bombPriceInBNB : '-.----'} BTC</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
-                  ${bombPriceInDollars ? bombPriceInDollars : '-.--'}
+                  ${bombPriceInDollars ? bombPriceInDollars : '-.--'} / BOMB
                 </span>
               </Box>
               <span style={{ fontSize: '12px' }}>
