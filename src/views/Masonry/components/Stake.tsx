@@ -32,7 +32,7 @@ import useWithdrawFromMasonry from '../../../hooks/useWithdrawFromMasonry';
 
 const Stake: React.FC = () => {
   const bombFinance = useBombFinance();
-  const [approveStatus, approve] = useApprove(bombFinance.BSHARE, bombFinance.contracts.Masonry.address);
+  const [approveStatus, approve] = useApprove(bombFinance.BSHARE, bombFinance.contracts.Boardroom.address);
 
   const tokenBalance = useTokenBalance(bombFinance.BSHARE);
   const stakedBalance = useStakedBalanceOnMasonry();

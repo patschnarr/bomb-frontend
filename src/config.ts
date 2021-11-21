@@ -42,9 +42,9 @@ const configurations: { [env: string]: Configuration } = {
       'BOMB-BNB-LP': ['0x107CDC0c46615C63EE4abC4E1e264D3BD12390e6', 18],
       'BSHARE-BNB-LP': ['0x1303246855b5B5EbC71F049Fdb607494e97218f8', 18],
     },
-    baseLaunchDate: new Date('2021-11-21 1:00:00Z'),
+    baseLaunchDate: new Date('2021-11-20 1:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
-    masonryLaunchesAt: new Date('2021-11-21T00:00:00Z'),
+    masonryLaunchesAt: new Date('2021-11-20T00:00:00Z'),
     refreshInterval: 10000,
   },
   production: {
@@ -64,9 +64,9 @@ const configurations: { [env: string]: Configuration } = {
       'BOMB-BNB-LP': ['0x107CDC0c46615C63EE4abC4E1e264D3BD12390e6', 18],
       'BSHARE-BNB-LP': ['0x1303246855b5B5EbC71F049Fdb607494e97218f8', 18],
     },
-    baseLaunchDate: new Date('2021-11-21 1:00:00Z'),
+    baseLaunchDate: new Date('2021-11-20 1:00:00Z'),
     bondLaunchesAt: new Date('2020-12-03T15:00:00Z'),
-    masonryLaunchesAt: new Date('2021-11-21T00:00:00Z'),
+    masonryLaunchesAt: new Date('2021-11-20T00:00:00Z'),
     refreshInterval: 10000,
   },
 };

@@ -29,7 +29,7 @@ export default function TransactionPopup({
         <StyledPopupDesc>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</StyledPopupDesc>
         {chainId && (
           <StyledLink target="_blank" href={`${config.ftmscanUrl}/tx/${hash}`}>
-            View on Ftmscan
+             View on BSCscan
           </StyledLink>
         )}
       </div>
