@@ -146,16 +146,16 @@ const Home = () => {
               <h2>Schedule</h2>
               <ul>
                 <li>
-                  <strong>Genesis Farm:</strong> Nov 21 23:00 - 24 hrs
+                  <strong>Genesis Farm:</strong> Nov 20 23:00 - 24 hrs
                 </li>
                 <li>
-                  <strong>Bomb Farm:</strong> Nov 22 23:00 - 5 days
+                  <strong>Bomb Farm:</strong> Nov 21 23:00 - 5 days
                 </li>
                 <li>
                   <strong>BSHARE Farm:</strong> Nov 25 23:00 - 365 days
                 </li>
                 <li>
-                  <strong>Boardroom:</strong> Dec 1 00:00
+                  <strong>Boardroom Start:</strong> Dec 1 00:00
                 </li>
               </ul>
             </Box>
