@@ -91,7 +91,7 @@ export class BombFinance {
 
   //===================================================================
   //===================== GET ASSET STATS =============================
-  //===================FROM SPOOKY TO DISPLAY =========================
+  //===================FROM PANCAKE TO DISPLAY =========================
   //=========================IN HOME PAGE==============================
   //===================================================================
 
@@ -103,6 +103,8 @@ export class BombFinance {
     const bombCirculatingSupply = supply.sub(bombRewardPoolSupply).sub(bombRewardPoolSupply2);
     const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BOMB);
     const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
+    const priceOfOneBTC = await this.getBTCBPriceFromPancakeswap();
+
     const priceOfBombInDollars = (Number(priceInBNB) * Number(priceOfOneBNB)).toFixed(2);
 
     return {
