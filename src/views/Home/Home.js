@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStats('BOMB-BTC-LP');
+  const bombFtmLpStats = useLpStats('BOMB-BNB-LP');
   const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
   const bombStats = useBombStats();
   const tShareStats = usetShareStats();
@@ -62,8 +62,8 @@ const Home = () => {
     tShare = tShareProd;
   }
 
-  const buyBombAddress = 'https://pancakeswap.finance/swap?outputCurrency=' + bomb.address;
-  const buyBShareAddress = 'https://pancakeswap.finance/swap?outputCurrency=' + tShare.address;
+  const buyBombAddress = 'https://pancakeswap.finance/swap?inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&outputCurrency=' + bomb.address;
+  const buyBShareAddress = 'https://pancakeswap.finance/swap?outputCurrency=0x531780FAcE85306877D7e1F05d713D1B50a37F7A';
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
@@ -100,7 +100,7 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const bombLpZap = useZap({ depositTokenName: 'BOMB-BNB-LP' });
+  const bombLpZap = useZap({ depositTokenName: 'BOMB-BTC-LP' });
   const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-LP' });
 
   const StyledLink = styled.a`
@@ -116,7 +116,7 @@ const Home = () => {
         bombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBombZap();
       }}
-      tokenName={'BOMB-BNB-LP'}
+      tokenName={'BOMB-BTC-LP'}
     />,
   );
 
@@ -146,10 +146,10 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Welcome to Bomb Money</h2>
-              <p>The first algorithmic stablecoin on Fantom Opera, pegged to the price of 1 BNB via seigniorage.</p>
+              <p>The first algorithmic stablecoin on Binance Smart Chain, pegged to the <br />price of 10,000 BOMB : 1 BTC via seigniorage.</p>
               <p>
-                Stake your BOMB-BNB LP in the Cemetery to earn BSHARE rewards.
-                Then stake your earned BSHARE in the Masonry to earn more BOMB!
+                Stake your BOMB-BTC LP in the Cemetery to earn BSHARE rewards.
+                Then stake your earned BSHARE in the Boardroom to earn more BOMB!
               </p>
             </Box>
           </Paper>
