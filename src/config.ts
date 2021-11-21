@@ -104,7 +104,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'CAKE',
     earnTokenName: 'BOMB',
     finished: false,
-    sort: 1,
+    sort: 3,
     closedForStaking: false,
   },
   BombSBTCRewardPool: {
@@ -115,7 +115,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'SBTC',
     earnTokenName: 'BOMB',
     finished: false,
-    sort: 2,
+    sort: 4,
     closedForStaking: false,
   },
   BombSUSDRewardPool: {
@@ -126,7 +126,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'SUSD',
     earnTokenName: 'BOMB',
     finished: false,
-    sort: 2,
+    sort: 5,
     closedForStaking: false,
   },
   BombSVLRewardPool: {
@@ -137,7 +137,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'SVL',
     earnTokenName: 'BOMB',
     finished: false,
-    sort: 2,
+    sort: 6,
     closedForStaking: false,
   },
   BombBTCLPBombRewardPool: {
@@ -148,7 +148,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'BOMB-BTCB-LP',
     earnTokenName: 'BOMB',
     finished: false,
-    sort: 0,
+    sort: 7,
     closedForStaking: false,
   },
   BombWBNBGenesisRewardPool: {
@@ -159,7 +159,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'WBNB',
     earnTokenName: 'BOMB',
     finished: false,
-    sort: 6,
+    sort: 1,
     closedForStaking: false,
   },
 
