@@ -62,8 +62,8 @@ const Home = () => {
     tShare = tShareProd;
   }
 
-  const buyTombAddress = 'https://spookyswap.finance/swap?outputCurrency=' + bomb.address;
-  const buyBShareAddress = 'https://spookyswap.finance/swap?outputCurrency=' + tShare.address;
+  const buyTombAddress = 'https://pancakeswap.finance/swap?outputCurrency=' + bomb.address;
+  const buyBShareAddress = 'https://pancakeswap.finance/swap?outputCurrency=' + tShare.address;
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);

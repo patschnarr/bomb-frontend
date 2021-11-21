@@ -12,6 +12,7 @@ export interface BankInfo {
   sort: number;
   finished: boolean;
   closedForStaking: boolean;
+  bankId: number;
 }
 
 export interface Bank extends BankInfo {
