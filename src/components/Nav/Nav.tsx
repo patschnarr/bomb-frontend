@@ -110,7 +110,7 @@ const Nav = () => {
               <Link color="textPrimary" to="/boardroom" className={classes.link}>
                 Boardroom
               </Link>
-              <Link color="textPrimary" to="/pit" className={classes.link}>
+              {/* <Link color="textPrimary" to="/pit" className={classes.link}>
                 Pit
               </Link>
               <Link color="textPrimary" to="/sbs" className={classes.link}>
@@ -124,7 +124,7 @@ const Nav = () => {
               </Link>
               <a href="https://docs.bomb.money" className={classes.link}>
                 Docs
-              </a>
+              </a> */}
             </Box>
             <AccountButton text="Connect" />
           </>
