@@ -4,7 +4,7 @@ import { useHasPendingApproval, useTransactionAdder } from '../state/transaction
 import useAllowance from './useAllowance';
 import ERC20 from '../bomb-finance/ERC20';
 import { TAX_OFFICE_ADDR } from '../utils/constants';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;
 const APPROVE_BASE_AMOUNT = BigNumber.from('1000000000000000000000000');
@@ -18,9 +18,9 @@ export enum ApprovalState {
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 function useApproveTaxOffice(): [ApprovalState, () => Promise<void>] {
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   let token: ERC20 = bombFinance.BOMB;
-  // if (zappingToken === FTM_TICKER) token = bombFinance.FTM;
+  // if (zappingToken === BNB_TICKER) token = bombFinance.BNB;
   // else if (zappingToken === BOMB_TICKER) token = bombFinance.BOMB;
   // else if (zappingToken === BSHARE_TICKER) token = bombFinance.BSHARE;
   const pendingApproval = useHasPendingApproval(token.address, TAX_OFFICE_ADDR);
@@ -29,7 +29,7 @@ function useApproveTaxOffice(): [ApprovalState, () => Promise<void>] {
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
     // we might not have enough data to know whether or not we need to approve
-    if (token === bombFinance.FTM) return ApprovalState.APPROVED;
+    if (token === bombFinance.BNB) return ApprovalState.APPROVED;
     if (!currentAllowance) return ApprovalState.UNKNOWN;
 
     // amountToApprove will be defined if currentAllowance is

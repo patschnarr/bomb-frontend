@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import useRefresh from './useRefresh';
 
 const useTotalStakedOnMasonry = () => {
   const [totalStaked, setTotalStaked] = useState(BigNumber.from(0));
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const { slowRefresh } = useRefresh();
   const isUnlocked = bombFinance?.isUnlocked;
 

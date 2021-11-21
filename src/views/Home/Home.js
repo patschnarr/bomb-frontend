@@ -9,7 +9,7 @@ import { createGlobalStyle } from 'styled-components';
 import CountUp from 'react-countup';
 import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
-import useTombStats from '../../hooks/useTombStats';
+import useBombStats from '../../hooks/useBombStats';
 import useLpStats from '../../hooks/useLpStats';
 import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
@@ -25,7 +25,7 @@ import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
 
 import { makeStyles } from '@material-ui/core/styles';
-import useTombFinance from '../../hooks/useTombFinance';
+import useBombFinance from '../../hooks/useBombFinance';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -47,10 +47,10 @@ const Home = () => {
   const TVL = useTotalValueLocked();
   const bombFtmLpStats = useLpStats('BOMB-BTC-LP');
   const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
-  const bombStats = useTombStats();
+  const bombStats = useBombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   let bomb;
   let tShare;
@@ -62,7 +62,7 @@ const Home = () => {
     tShare = tShareProd;
   }
 
-  const buyTombAddress = 'https://pancakeswap.finance/swap?outputCurrency=' + bomb.address;
+  const buyBombAddress = 'https://pancakeswap.finance/swap?outputCurrency=' + bomb.address;
   const buyBShareAddress = 'https://pancakeswap.finance/swap?outputCurrency=' + tShare.address;
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
@@ -71,7 +71,7 @@ const Home = () => {
     () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
     [bombStats],
   );
-  const bombPriceInFTM = useMemo(() => (bombStats ? Number(bombStats.tokenInFtm).toFixed(4) : null), [bombStats]);
+  const bombPriceInBNB = useMemo(() => (bombStats ? Number(bombStats.tokenInFtm).toFixed(4) : null), [bombStats]);
   const bombCirculatingSupply = useMemo(() => (bombStats ? String(bombStats.circulatingSupply) : null), [bombStats]);
   const bombTotalSupply = useMemo(() => (bombStats ? String(bombStats.totalSupply) : null), [bombStats]);
 
@@ -79,7 +79,7 @@ const Home = () => {
     () => (tShareStats ? Number(tShareStats.priceInDollars).toFixed(2) : null),
     [tShareStats],
   );
-  const tSharePriceInFTM = useMemo(
+  const tSharePriceInBNB = useMemo(
     () => (tShareStats ? Number(tShareStats.tokenInFtm).toFixed(4) : null),
     [tShareStats],
   );
@@ -93,42 +93,42 @@ const Home = () => {
     () => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null),
     [tBondStats],
   );
-  const tBondPriceInFTM = useMemo(() => (tBondStats ? Number(tBondStats.tokenInFtm).toFixed(4) : null), [tBondStats]);
+  const tBondPriceInBNB = useMemo(() => (tBondStats ? Number(tBondStats.tokenInFtm).toFixed(4) : null), [tBondStats]);
   const tBondCirculatingSupply = useMemo(
     () => (tBondStats ? String(tBondStats.circulatingSupply) : null),
     [tBondStats],
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const bombLpZap = useZap({ depositTokenName: 'BOMB-FTM-LP' });
-  const bshareLpZap = useZap({ depositTokenName: 'BSHARE-FTM-LP' });
+  const bombLpZap = useZap({ depositTokenName: 'BOMB-BNB-LP' });
+  const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-LP' });
 
   const StyledLink = styled.a`
     font-weight: 700;
     text-decoration: none;
   `;
 
-  const [onPresentTombZap, onDissmissTombZap] = useModal(
+  const [onPresentBombZap, onDissmissBombZap] = useModal(
     <ZapModal
       decimals={18}
       onConfirm={(zappingToken, tokenName, amount) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         bombLpZap.onZap(zappingToken, tokenName, amount);
-        onDissmissTombZap();
+        onDissmissBombZap();
       }}
-      tokenName={'BOMB-FTM-LP'}
+      tokenName={'BOMB-BNB-LP'}
     />,
   );
 
-  const [onPresentTshareZap, onDissmissTshareZap] = useModal(
+  const [onPresentBshareZap, onDissmissBshareZap] = useModal(
     <ZapModal
       decimals={18}
       onConfirm={(zappingToken, tokenName, amount) => {
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         bshareLpZap.onZap(zappingToken, tokenName, amount);
-        onDissmissTshareZap();
+        onDissmissBshareZap();
       }}
-      tokenName={'BSHARE-FTM-LP'}
+      tokenName={'BSHARE-BNB-LP'}
     />,
   );
 
@@ -146,9 +146,9 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Welcome to Bomb Money</h2>
-              <p>The first algorithmic stablecoin on Fantom Opera, pegged to the price of 1 FTM via seigniorage.</p>
+              <p>The first algorithmic stablecoin on Fantom Opera, pegged to the price of 1 BNB via seigniorage.</p>
               <p>
-                Stake your BOMB-FTM LP in the Cemetery to earn BSHARE rewards.
+                Stake your BOMB-BNB LP in the Cemetery to earn BSHARE rewards.
                 Then stake your earned BSHARE in the Masonry to earn more BOMB!
               </p>
             </Box>
@@ -191,7 +191,7 @@ const Home = () => {
               <Button
                 color="primary"
                 target="_blank"
-                href={buyTombAddress}
+                href={buyBombAddress}
                 variant="contained"
                 style={{ marginRight: '10px' }}
                 className={classes.button}
@@ -228,7 +228,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{bombPriceInFTM ? bombPriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>{bombPriceInBNB ? bombPriceInBNB : '-.----'} BNB</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>
@@ -267,7 +267,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tSharePriceInFTM ? tSharePriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>{tSharePriceInBNB ? tSharePriceInBNB : '-.----'} BNB</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tSharePriceInDollars ? tSharePriceInDollars : '-.--'}</span>
@@ -304,7 +304,7 @@ const Home = () => {
               </Box>
               Current Price
               <Box>
-                <span style={{ fontSize: '30px' }}>{tBondPriceInFTM ? tBondPriceInFTM : '-.----'} FTM</span>
+                <span style={{ fontSize: '30px' }}>{tBondPriceInBNB ? tBondPriceInBNB : '-.----'} BNB</span>
               </Box>
               <Box>
                 <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
@@ -320,21 +320,21 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BOMB-FTM Spooky LP</h2>
+              <h2>BOMB-BNB Spooky LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="BOMB-FTM-LP" />
+                  <TokenSymbol symbol="BOMB-BNB-LP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                <Button color="primary" disabled={true} onClick={onPresentTombZap} variant="contained">
+                <Button color="primary" disabled={true} onClick={onPresentBombZap} variant="contained">
                   Zap In
                 </Button>
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {bombLPStats?.tokenAmount ? bombLPStats?.tokenAmount : '-.--'} BOMB /{' '}
-                  {bombLPStats?.ftmAmount ? bombLPStats?.ftmAmount : '-.--'} FTM
+                  {bombLPStats?.ftmAmount ? bombLPStats?.ftmAmount : '-.--'} BNB
                 </span>
               </Box>
               <Box>${bombLPStats?.priceOfOne ? bombLPStats.priceOfOne : '-.--'}</Box>
@@ -348,21 +348,21 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BSHARE-FTM Spooky LP</h2>
+              <h2>BSHARE-BNB Spooky LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="BSHARE-FTM-LP" />
+                  <TokenSymbol symbol="BSHARE-BNB-LP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                <Button color="primary" onClick={onPresentTshareZap} variant="contained">
+                <Button color="primary" onClick={onPresentBshareZap} variant="contained">
                   Zap In
                 </Button>
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
                   {bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} BSHARE /{' '}
-                  {bshareLPStats?.ftmAmount ? bshareLPStats?.ftmAmount : '-.--'} FTM
+                  {bshareLPStats?.ftmAmount ? bshareLPStats?.ftmAmount : '-.--'} BNB
                 </span>
               </Box>
               <Box>${bshareLPStats?.priceOfOne ? bshareLPStats.priceOfOne : '-.--'}</Box>

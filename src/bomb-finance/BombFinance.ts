@@ -13,12 +13,12 @@ import IUniswapV2PairABI from './IUniswapV2Pair.abi.json';
 import config, { bankDefinitions } from '../config';
 import moment from 'moment';
 import { parseUnits } from 'ethers/lib/utils';
-import { FTM_TICKER, SPOOKY_ROUTER_ADDR, BOMB_TICKER } from '../utils/constants';
+import { BNB_TICKER, SPOOKY_ROUTER_ADDR, BOMB_TICKER } from '../utils/constants';
 /**
  * An API module of Bomb Money contracts.
  * All contract-interacting domain logic should be defined in here.
  */
-export class TombFinance {
+export class BombFinance {
   myAccount: string;
   provider: ethers.providers.Web3Provider;
   signer?: ethers.Signer;
@@ -27,11 +27,12 @@ export class TombFinance {
   externalTokens: { [name: string]: ERC20 };
   masonryVersionOfUser?: string;
 
-  BOMBWBNB_LP: Contract;
+  BOMBBTC_LP: Contract;
   BOMB: ERC20;
   BSHARE: ERC20;
   BBOND: ERC20;
-  FTM: ERC20;
+  BNB: ERC20;
+  BTC: ERC20;
 
   constructor(cfg: Configuration) {
     const { deployments, externalTokens } = cfg;
@@ -49,10 +50,11 @@ export class TombFinance {
     this.BOMB = new ERC20(deployments.Bomb.address, provider, 'BOMB');
     this.BSHARE = new ERC20(deployments.BShare.address, provider, 'BSHARE');
     this.BBOND = new ERC20(deployments.BBond.address, provider, 'BBOND');
-    this.FTM = this.externalTokens['WBNB'];
+    this.BNB = this.externalTokens['WBNB'];
+    this.BTC = this.externalTokens['BTCB'];
 
     // Uniswap V2 Pair
-    this.BOMBWBNB_LP = new Contract(externalTokens['BOMB-FTM-LP'][0], IUniswapV2PairABI, provider);
+    this.BOMBBTC_LP = new Contract(externalTokens['BOMB-BTC-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -73,7 +75,7 @@ export class TombFinance {
     for (const token of tokens) {
       token.connect(this.signer);
     }
-    this.BOMBWBNB_LP = this.BOMBWBNB_LP.connect(this.signer);
+    this.BOMBBTC_LP = this.BOMBBTC_LP.connect(this.signer);
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
     this.fetchMasonryVersionOfUser()
       .then((version) => (this.masonryVersionOfUser = version))
@@ -93,23 +95,19 @@ export class TombFinance {
   //=========================IN HOME PAGE==============================
   //===================================================================
 
-  async getTombStat(): Promise<TokenStat> {
-    const { TombFtmRewardPool, TombFtmLpTombRewardPool, TombFtmLpTombRewardPoolOld } = this.contracts;
+  async getBombStat(): Promise<TokenStat> {
+    const { BombRewardPool, BombGenesisRewardPool } = this.contracts;
     const supply = await this.BOMB.totalSupply();
-    const bombRewardPoolSupply = await this.BOMB.balanceOf(TombFtmRewardPool.address);
-    const bombRewardPoolSupply2 = await this.BOMB.balanceOf(TombFtmLpTombRewardPool.address);
-    const bombRewardPoolSupplyOld = await this.BOMB.balanceOf(TombFtmLpTombRewardPoolOld.address);
-    const bombCirculatingSupply = supply
-      .sub(bombRewardPoolSupply)
-      .sub(bombRewardPoolSupply2)
-      .sub(bombRewardPoolSupplyOld);
-    const priceInFTM = await this.getTokenPriceFromPancakeswap(this.BOMB);
-    const priceOfOneFTM = await this.getWBNBPriceFromPancakeswap();
-    const priceOfTombInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
+    const bombRewardPoolSupply = await this.BOMB.balanceOf(BombGenesisRewardPool.address);
+    const bombRewardPoolSupply2 = await this.BOMB.balanceOf(BombRewardPool.address);
+    const bombCirculatingSupply = supply.sub(bombRewardPoolSupply).sub(bombRewardPoolSupply2);
+    const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BOMB);
+    const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
+    const priceOfBombInDollars = (Number(priceInBNB) * Number(priceOfOneBNB)).toFixed(2);
 
     return {
-      tokenInFtm: priceInFTM,
-      priceInDollars: priceOfTombInDollars,
+      tokenInFtm: priceInBNB,
+      priceInDollars: priceOfBombInDollars,
       totalSupply: getDisplayBalance(supply, this.BOMB.decimal, 0),
       circulatingSupply: getDisplayBalance(bombCirculatingSupply, this.BOMB.decimal, 0),
     };
@@ -124,16 +122,16 @@ export class TombFinance {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
-    const token0 = name.startsWith('BOMB') ? this.BOMB : this.BSHARE;
-    const isTomb = name.startsWith('BOMB');
+    const token0 = name.startsWith('bomb') ? this.BOMB : this.BSHARE;
+    const isBomb = name.startsWith('bomb');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
-    const ftmAmountBN = await this.FTM.balanceOf(lpToken.address);
+    const ftmAmountBN = await this.BNB.balanceOf(lpToken.address);
     const ftmAmount = getDisplayBalance(ftmAmountBN, 18);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const ftmAmountInOneLP = Number(ftmAmount) / Number(lpTokenSupply);
-    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isTomb);
+    const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isBomb);
     const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
     const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
     return {
@@ -146,23 +144,23 @@ export class TombFinance {
   }
 
   /**
-   * Use this method to get price for Tomb
+   * Use this method to get price for Bomb
    * @returns TokenStat for BBOND
-   * priceInFTM
+   * priceInBNB
    * priceInDollars
    * TotalSupply
    * CirculatingSupply (always equal to total supply for bonds)
    */
   async getBondStat(): Promise<TokenStat> {
     const { Treasury } = this.contracts;
-    const bombStat = await this.getTombStat();
-    const bondTombRatioBN = await Treasury.getBondPremiumRate();
-    const modifier = bondTombRatioBN / 1e18 > 1 ? bondTombRatioBN / 1e18 : 1;
-    const bondPriceInFTM = (Number(bombStat.tokenInFtm) * modifier).toFixed(2);
+    const bombStat = await this.getBombStat();
+    const bondBombRatioBN = await Treasury.getBondPremiumRate();
+    const modifier = bondBombRatioBN / 1e18 > 1 ? bondBombRatioBN / 1e18 : 1;
+    const bondPriceInBNB = (Number(bombStat.tokenInFtm) * modifier).toFixed(2);
     const priceOfBBondInDollars = (Number(bombStat.priceInDollars) * modifier).toFixed(2);
     const supply = await this.BBOND.displayedTotalSupply();
     return {
-      tokenInFtm: bondPriceInFTM,
+      tokenInFtm: bondPriceInBNB,
       priceInDollars: priceOfBBondInDollars,
       totalSupply: supply,
       circulatingSupply: supply,
@@ -171,36 +169,36 @@ export class TombFinance {
 
   /**
    * @returns TokenStat for BSHARE
-   * priceInFTM
+   * priceInBNB
    * priceInDollars
    * TotalSupply
    * CirculatingSupply (always equal to total supply for bonds)
    */
   async getShareStat(): Promise<TokenStat> {
-    const { TombFtmLPBShareRewardPool } = this.contracts;
+    const { BShareRewardPool } = this.contracts;
 
     const supply = await this.BSHARE.totalSupply();
 
-    const priceInFTM = await this.getTokenPriceFromPancakeswap(this.BSHARE);
-    const bombRewardPoolSupply = await this.BSHARE.balanceOf(TombFtmLPBShareRewardPool.address);
+    const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BSHARE);
+    const bombRewardPoolSupply = await this.BSHARE.balanceOf(BShareRewardPool.address);
     const tShareCirculatingSupply = supply.sub(bombRewardPoolSupply);
-    const priceOfOneFTM = await this.getWBNBPriceFromPancakeswap();
-    const priceOfSharesInDollars = (Number(priceInFTM) * Number(priceOfOneFTM)).toFixed(2);
+    const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
+    const priceOfSharesInDollars = (Number(priceInBNB) * Number(priceOfOneBNB)).toFixed(2);
 
     return {
-      tokenInFtm: priceInFTM,
+      tokenInFtm: priceInBNB,
       priceInDollars: priceOfSharesInDollars,
       totalSupply: getDisplayBalance(supply, this.BSHARE.decimal, 0),
       circulatingSupply: getDisplayBalance(tShareCirculatingSupply, this.BSHARE.decimal, 0),
     };
   }
 
-  async getTombStatInEstimatedTWAP(): Promise<TokenStat> {
-    const { SeigniorageOracle, TombFtmRewardPool } = this.contracts;
-    const expectedPrice = await SeigniorageOracle.twap(this.BOMB.address, ethers.utils.parseEther('1'));
+  async getBombStatInEstimatedTWAP(): Promise<TokenStat> {
+    const { Oracle, BombRewardPool } = this.contracts;
+    const expectedPrice = await Oracle.twap(this.BOMB.address, ethers.utils.parseEther('1'));
 
     const supply = await this.BOMB.totalSupply();
-    const bombRewardPoolSupply = await this.BOMB.balanceOf(TombFtmRewardPool.address);
+    const bombRewardPoolSupply = await this.BOMB.balanceOf(BombRewardPool.address);
     const bombCirculatingSupply = supply.sub(bombRewardPoolSupply);
     return {
       tokenInFtm: getDisplayBalance(expectedPrice),
@@ -210,14 +208,14 @@ export class TombFinance {
     };
   }
 
-  async getTombPriceInLastTWAP(): Promise<BigNumber> {
+  async getBombPriceInLastTWAP(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
-    return Treasury.getTombUpdatedPrice();
+    return Treasury.getBombUpdatedPrice();
   }
 
   async getBondsPurchasable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
-    return Treasury.getBurnableTombLeft();
+    return Treasury.getBurnableBombLeft();
   }
 
   /**
@@ -232,7 +230,7 @@ export class TombFinance {
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    const stat = bank.earnTokenName === 'BOMB' ? await this.getTombStat() : await this.getShareStat();
+    const stat = bank.earnTokenName === 'BOMB' ? await this.getBombStat() : await this.getShareStat();
     const tokenPerSecond = await this.getTokenPerSecond(
       bank.earnTokenName,
       bank.contract,
@@ -269,7 +267,7 @@ export class TombFinance {
     depositTokenName: string,
   ) {
     if (earnTokenName === 'BOMB') {
-      if (!contractName.endsWith('TombRewardPool')) {
+      if (!contractName.endsWith('BombRewardPool')) {
         const rewardPerSecond = await poolContract.bombPerSecond();
         if (depositTokenName === 'WBNB') {
           return rewardPerSecond.mul(6000).div(11000).div(24);
@@ -286,9 +284,9 @@ export class TombFinance {
       const startDateTime = new Date(poolStartTime.toNumber() * 1000);
       const FOUR_DAYS = 4 * 24 * 60 * 60 * 1000;
       if (Date.now() - startDateTime.getTime() > FOUR_DAYS) {
-        return await poolContract.epochTombPerSecond(1);
+        return await poolContract.epochBombPerSecond(1);
       }
-      return await poolContract.epochTombPerSecond(0);
+      return await poolContract.epochBombPerSecond(0);
     }
     const rewardPerSecond = await poolContract.tSharePerSecond();
     if (depositTokenName.startsWith('BOMB')) {
@@ -312,9 +310,9 @@ export class TombFinance {
     if (tokenName === 'WBNB') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
-      if (tokenName === 'BOMB-FTM-LP') {
+      if (tokenName === 'BOMB-BNB-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.BOMB, true);
-      } else if (tokenName === 'BSHARE-FTM-LP') {
+      } else if (tokenName === 'BSHARE-BNB-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.BSHARE, false);
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
@@ -345,8 +343,8 @@ export class TombFinance {
    */
   async buyBonds(amount: string | number): Promise<TransactionResponse> {
     const { Treasury } = this.contracts;
-    const treasuryTombPrice = await Treasury.getTombPrice();
-    return await Treasury.buyBonds(decimalToBalance(amount), treasuryTombPrice);
+    const treasuryBombPrice = await Treasury.getBombPrice();
+    return await Treasury.buyBonds(decimalToBalance(amount), treasuryBombPrice);
   }
 
   /**
@@ -355,8 +353,8 @@ export class TombFinance {
    */
   async redeemBonds(amount: string): Promise<TransactionResponse> {
     const { Treasury } = this.contracts;
-    const priceForTomb = await Treasury.getTombPrice();
-    return await Treasury.redeemBonds(decimalToBalance(amount), priceForTomb);
+    const priceForBomb = await Treasury.getBombPrice();
+    return await Treasury.redeemBonds(decimalToBalance(amount), priceForBomb);
   }
 
   async getTotalValueLocked(): Promise<Number> {
@@ -382,15 +380,15 @@ export class TombFinance {
    * Calculates the price of an LP token
    * Reference https://github.com/DefiDebauchery/discordpricebot/blob/4da3cdb57016df108ad2d0bb0c91cd8dd5f9d834/pricebot/pricebot.py#L150
    * @param lpToken the token under calculation
-   * @param token the token pair used as reference (the other one would be FTM in most cases)
-   * @param isTomb sanity check for usage of bomb token or tShare
+   * @param token the token pair used as reference (the other one would be BNB in most cases)
+   * @param isBomb sanity check for usage of bomb token or tShare
    * @returns price of the LP token
    */
-  async getLPTokenPrice(lpToken: ERC20, token: ERC20, isTomb: boolean): Promise<string> {
+  async getLPTokenPrice(lpToken: ERC20, token: ERC20, isBomb: boolean): Promise<string> {
     const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
-    const stat = isTomb === true ? await this.getTombStat() : await this.getShareStat();
+    const stat = isBomb === true ? await this.getBombStat() : await this.getShareStat();
     const priceOfToken = stat.priceInDollars;
     const tokenInLP = Number(tokenSupply) / Number(totalSupply);
     const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
@@ -486,7 +484,7 @@ export class TombFinance {
   async getTokenPriceFromPancakeswap(tokenContract: ERC20): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    // const { chainId } = this.config;
+    //const { chainId } = this.config;
     const { WBNB } = this.config.externalTokens;
 
     const wftm = new Token(56, WBNB[0], WBNB[1]);
@@ -530,7 +528,7 @@ export class TombFinance {
     if (!ready) return;
     const { WBNB, FUSDT } = this.externalTokens;
     try {
-      const fusdt_wftm_lp_pair = this.externalTokens['USDT-FTM-LP'];
+      const fusdt_wftm_lp_pair = this.externalTokens['USDT-BNB-LP'];
       let ftm_amount_BN = await WBNB.balanceOf(fusdt_wftm_lp_pair.address);
       let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, WBNB.decimal));
       let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_wftm_lp_pair.address);
@@ -555,7 +553,7 @@ export class TombFinance {
     const lastRewardsReceived = lastHistory[1];
 
     const BSHAREPrice = (await this.getShareStat()).priceInDollars;
-    const BOMBPrice = (await this.getTombStat()).priceInDollars;
+    const BOMBPrice = (await this.getBombStat()).priceInDollars;
     const epochRewardsPerShare = lastRewardsReceived / 1e18;
 
     //Mgod formula
@@ -746,7 +744,7 @@ export class TombFinance {
     return true;
   }
 
-  async provideTombFtmLP(ftmAmount: string, bombAmount: BigNumber): Promise<TransactionResponse> {
+  async provideBombFtmLP(ftmAmount: string, bombAmount: BigNumber): Promise<TransactionResponse> {
     const { TaxOffice } = this.contracts;
     let overrides = {
       value: parseUnits(ftmAmount, 18),
@@ -761,7 +759,7 @@ export class TombFinance {
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {
     const { SpookyRouter } = this.contracts;
-    const { _reserve0, _reserve1 } = await this.BOMBWBNB_LP.getReserves();
+    const { _reserve0, _reserve1 } = await this.BOMBBTC_LP.getReserves();
     let quote;
     if (tokenName === 'BOMB') {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve1, _reserve0);
@@ -848,7 +846,7 @@ export class TombFinance {
     const { zapper } = this.contracts;
     const lpToken = this.externalTokens[lpName];
     let estimate;
-    if (tokenName === FTM_TICKER) {
+    if (tokenName === BNB_TICKER) {
       estimate = await zapper.estimateZapIn(lpToken.address, SPOOKY_ROUTER_ADDR, parseUnits(amount, 18));
     } else {
       const token = tokenName === BOMB_TICKER ? this.BOMB : this.BSHARE;
@@ -864,7 +862,7 @@ export class TombFinance {
   async zapIn(tokenName: string, lpName: string, amount: string): Promise<TransactionResponse> {
     const { zapper } = this.contracts;
     const lpToken = this.externalTokens[lpName];
-    if (tokenName === FTM_TICKER) {
+    if (tokenName === BNB_TICKER) {
       let overrides = {
         value: parseUnits(amount, 18),
       };
@@ -898,9 +896,9 @@ export class TombFinance {
     const { BShareSwapper } = this.contracts;
     const bshareBalanceBN = await BShareSwapper.getBShareBalance();
     const bbondBalanceBN = await BShareSwapper.getBBondBalance(address);
-    // const bombPriceBN = await BShareSwapper.getTombPrice();
+    // const bombPriceBN = await BShareSwapper.getBombPrice();
     // const bsharePriceBN = await BShareSwapper.getBSharePrice();
-    const rateBSharePerTombBN = await BShareSwapper.getBShareAmountPerTomb();
+    const rateBSharePerBombBN = await BShareSwapper.getBShareAmountPerBomb();
     const bshareBalance = getDisplayBalance(bshareBalanceBN, 18, 5);
     const bbondBalance = getDisplayBalance(bbondBalanceBN, 18, 5);
     return {
@@ -908,7 +906,7 @@ export class TombFinance {
       bbondBalance: bbondBalance.toString(),
       // bombPrice: bombPriceBN.toString(),
       // bsharePrice: bsharePriceBN.toString(),
-      rateBSharePerTomb: rateBSharePerTombBN.toString(),
+      rateBSharePerBomb: rateBSharePerBombBN.toString(),
     };
   }
 }

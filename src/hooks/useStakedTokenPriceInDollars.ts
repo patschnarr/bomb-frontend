@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import config from '../config';
 import ERC20 from '../bomb-finance/ERC20';
 
 const useStakedTokenPriceInDollars = (stakedTokenName: string, stakedToken: ERC20) => {
   const [stakedTokenPriceInDollars, setStakedTokenPriceInDollars] = useState('0');
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const isUnlocked = bombFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {

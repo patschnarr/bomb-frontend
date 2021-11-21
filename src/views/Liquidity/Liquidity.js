@@ -4,15 +4,15 @@ import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/home.png';
 import useLpStats from '../../hooks/useLpStats';
 import { Box, Button, Grid, Paper, Typography } from '@material-ui/core';
-import useTombStats from '../../hooks/useTombStats';
+import useBombStats from '../../hooks/useBombStats';
 import TokenInput from '../../components/TokenInput';
-import useTombFinance from '../../hooks/useTombFinance';
+import useBombFinance from '../../hooks/useBombFinance';
 import { useWallet } from 'use-wallet';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import useApproveTaxOffice from '../../hooks/useApproveTaxOffice';
 import { ApprovalState } from '../../hooks/useApprove';
-import useProvideTombFtmLP from '../../hooks/useProvideTombFtmLP';
+import useProvideBombFtmLP from '../../hooks/useProvideBombFtmLP';
 import { Alert } from '@material-ui/lab';
 
 const BackgroundImage = createGlobalStyle`
@@ -26,29 +26,29 @@ function isNumeric(n) {
 }
 
 const ProvideLiquidity = () => {
-  const [bombAmount, setTombAmount] = useState(0);
+  const [bombAmount, setBombAmount] = useState(0);
   const [ftmAmount, setFtmAmount] = useState(0);
   const [lpTokensAmount, setLpTokensAmount] = useState(0);
   const { balance } = useWallet();
-  const bombStats = useTombStats();
-  const bombFinance = useTombFinance();
+  const bombStats = useBombStats();
+  const bombFinance = useBombFinance();
   const [approveTaxOfficeStatus, approveTaxOffice] = useApproveTaxOffice();
   const bombBalance = useTokenBalance(bombFinance.BOMB);
   const ftmBalance = (balance / 1e18).toFixed(4);
-  const { onProvideTombFtmLP } = useProvideTombFtmLP();
-  const bombFtmLpStats = useLpStats('BOMB-FTM-LP');
+  const { onProvideBombFtmLP } = useProvideBombFtmLP();
+  const bombFtmLpStats = useLpStats('BOMB-BNB-LP');
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
-  const bombPriceInFTM = useMemo(() => (bombStats ? Number(bombStats.tokenInFtm).toFixed(2) : null), [bombStats]);
+  const bombPriceInBNB = useMemo(() => (bombStats ? Number(bombStats.tokenInFtm).toFixed(2) : null), [bombStats]);
   const ftmPriceInBOMB = useMemo(() => (bombStats ? Number(1 / bombStats.tokenInFtm).toFixed(2) : null), [bombStats]);
   // const classes = useStyles();
 
-  const handleTombChange = async (e) => {
+  const handleBombChange = async (e) => {
     if (e.currentTarget.value === '' || e.currentTarget.value === 0) {
-      setTombAmount(e.currentTarget.value);
+      setBombAmount(e.currentTarget.value);
     }
     if (!isNumeric(e.currentTarget.value)) return;
-    setTombAmount(e.currentTarget.value);
+    setBombAmount(e.currentTarget.value);
     const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'BOMB');
     setFtmAmount(quoteFromSpooky);
     setLpTokensAmount(quoteFromSpooky / bombLPStats.ftmAmount);
@@ -61,20 +61,20 @@ const ProvideLiquidity = () => {
     if (!isNumeric(e.currentTarget.value)) return;
     setFtmAmount(e.currentTarget.value);
     const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'BTCB');
-    setTombAmount(quoteFromSpooky);
+    setBombAmount(quoteFromSpooky);
 
     setLpTokensAmount(quoteFromSpooky / bombLPStats.tokenAmount);
   };
-  const handleTombSelectMax = async () => {
+  const handleBombSelectMax = async () => {
     const quoteFromSpooky = await bombFinance.quoteFromSpooky(getDisplayBalance(bombBalance), 'BOMB');
-    setTombAmount(getDisplayBalance(bombBalance));
+    setBombAmount(getDisplayBalance(bombBalance));
     setFtmAmount(quoteFromSpooky);
     setLpTokensAmount(quoteFromSpooky / bombLPStats.ftmAmount);
   };
   const handleFtmSelectMax = async () => {
-    const quoteFromSpooky = await bombFinance.quoteFromSpooky(ftmBalance, 'FTM');
+    const quoteFromSpooky = await bombFinance.quoteFromSpooky(ftmBalance, 'BNB');
     setFtmAmount(ftmBalance);
-    setTombAmount(quoteFromSpooky);
+    setBombAmount(quoteFromSpooky);
     setLpTokensAmount(ftmBalance / bombLPStats.ftmAmount);
   };
   return (
@@ -97,8 +97,8 @@ const ProvideLiquidity = () => {
                     <Grid container>
                       <Grid item xs={12}>
                         <TokenInput
-                          onSelectMax={handleTombSelectMax}
-                          onChange={handleTombChange}
+                          onSelectMax={handleBombSelectMax}
+                          onChange={handleBombChange}
                           value={bombAmount}
                           max={getDisplayBalance(bombBalance)}
                           symbol={'BOMB'}
@@ -114,15 +114,15 @@ const ProvideLiquidity = () => {
                         ></TokenInput>
                       </Grid>
                       <Grid item xs={12}>
-                        <p>1 BOMB = {bombPriceInFTM} FTM</p>
-                        <p>1 FTM = {ftmPriceInBOMB} BOMB</p>
+                        <p>1 BOMB = {bombPriceInBNB} BNB</p>
+                        <p>1 BNB = {ftmPriceInBOMB} BOMB</p>
                         <p>LP tokens ≈ {lpTokensAmount.toFixed(2)}</p>
                       </Grid>
                       <Grid xs={12} justifyContent="center" style={{ textAlign: 'center' }}>
                         {approveTaxOfficeStatus === ApprovalState.APPROVED ? (
                           <Button
                             variant="contained"
-                            onClick={() => onProvideTombFtmLP(ftmAmount.toString(), bombAmount.toString())}
+                            onClick={() => onProvideBombFtmLP(ftmAmount.toString(), bombAmount.toString())}
                             color="primary"
                             style={{ margin: '0 10px', color: '#fff' }}
                           >

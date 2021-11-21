@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import { Bank } from '../bomb-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useRedeem = (bank: Bank) => {
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleRedeem = useCallback(() => {

@@ -1,8 +1,8 @@
-# Contributing to [Tomb.Fiance](https://bomb.money)
+# Contributing to [Bomb.Fiance](https://bomb.money)
 
 🎉 First off all, thanks for taking the time to contribute! 🎉
 
-Following is a set of guidelines for contributing to the `Tomb.Finance` website. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+Following is a set of guidelines for contributing to the `Bomb.Finance` website. These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
 
 ## Code of Conduct
 

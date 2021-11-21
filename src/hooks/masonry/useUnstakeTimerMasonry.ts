@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './../useTombFinance';
+import useBombFinance from './../useBombFinance';
 import { AllocationTime } from '../../bomb-finance/types';
 
 const useUnstakeTimerMasonry = () => {
@@ -7,7 +7,7 @@ const useUnstakeTimerMasonry = () => {
     from: new Date(),
     to: new Date(),
   });
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   useEffect(() => {
     if (bombFinance) {

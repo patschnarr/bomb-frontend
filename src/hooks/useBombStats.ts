@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import { TokenStat } from '../bomb-finance/types';
 import useRefresh from './useRefresh';
 
-const useTombStats = () => {
+const useBombStats = () => {
   const [stat, setStat] = useState<TokenStat>();
   const { fastRefresh } = useRefresh();
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   useEffect(() => {
-    async function fetchTombPrice() {
+    async function fetchBombPrice() {
       try {
-        setStat(await bombFinance.getTombStat());
+        setStat(await bombFinance.getBombStat());
       } catch (err) {
         console.error(err);
       }
     }
-    fetchTombPrice();
+    fetchBombPrice();
   }, [setStat, bombFinance, fastRefresh]);
 
   return stat;
 };
 
-export default useTombStats;
+export default useBombStats;

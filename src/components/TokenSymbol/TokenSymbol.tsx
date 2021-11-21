@@ -27,8 +27,13 @@ const logosBySymbol: { [title: string]: string } = {
   BOO: booLogo,
   SHIBA: shibaLogo,
   ZOO: zooLogo,
-  'BOMB-FTM-LP': bombFtmLpLogo,
-  'BSHARE-FTM-LP': bshareFtmLpLogo,
+  CAKE: bombLogo,
+    SUSD: bombLogo,
+  SBTC:bombLogo,
+    BTCB: bombLogo,
+  'BOMB-BNB-LP': bombFtmLpLogo,
+    'BOMB-BTC-LP': bombFtmLpLogo,
+  'BSHARE-BNB-LP': bshareFtmLpLogo,
 };
 
 type LogoProps = {

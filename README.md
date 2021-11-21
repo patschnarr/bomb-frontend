@@ -1,4 +1,4 @@
-# 🪦Welcome to the Tomb.Finance ecosystem🪦
+# 🪦Welcome to the Bomb.Finance ecosystem🪦
 
 Thanks for taking the time to contribute!
 You can start by reading our [Contribution guidelines](CONTRIBUTING.md) first.

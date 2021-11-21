@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import config from '../config';
 import { BigNumber } from 'ethers';
 
 const useCashPriceInLastTWAP = () => {
   const [price, setPrice] = useState<BigNumber>(BigNumber.from(0));
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   const fetchCashPrice = useCallback(async () => {
-    setPrice(await bombFinance.getTombPriceInLastTWAP());
+    setPrice(await bombFinance.getBombPriceInLastTWAP());
   }, [bombFinance]);
 
   useEffect(() => {

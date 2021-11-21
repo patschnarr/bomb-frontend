@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import useRefresh from './useRefresh';
 
 const useStakedBalanceOnMasonry = () => {
   const { slowRefresh } = useRefresh();
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const isUnlocked = bombFinance?.isUnlocked;
   useEffect(() => {
     async function fetchBalance() {

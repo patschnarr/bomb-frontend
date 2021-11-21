@@ -1,26 +1,26 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useWallet } from 'use-wallet';
-import TombFinance from '../../bomb-finance';
+import BombFinance from '../../bomb-finance';
 import config from '../../config';
 
-export interface TombFinanceContext {
-  bombFinance?: TombFinance;
+export interface BombFinanceContext {
+  bombFinance?: BombFinance;
 }
 
-export const Context = createContext<TombFinanceContext>({ bombFinance: null });
+export const Context = createContext<BombFinanceContext>({ bombFinance: null });
 
-export const TombFinanceProvider: React.FC = ({ children }) => {
+export const BombFinanceProvider: React.FC = ({ children }) => {
   const { ethereum, account } = useWallet();
-  const [bombFinance, setTombFinance] = useState<TombFinance>();
+  const [bombFinance, setBombFinance] = useState<BombFinance>();
 
   useEffect(() => {
     if (!bombFinance) {
-      const bomb = new TombFinance(config);
+      const bomb = new BombFinance(config);
       if (account) {
         // wallet was unlocked at initialization
         bomb.unlockWallet(ethereum, account);
       }
-      setTombFinance(bomb);
+      setBombFinance(bomb);
     } else if (account) {
       bombFinance.unlockWallet(ethereum, account);
     }

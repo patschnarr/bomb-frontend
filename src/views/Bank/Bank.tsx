@@ -16,7 +16,7 @@ import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 import useRedeem from '../../hooks/useRedeem';
 import { Bank as BankEntity } from '../../bomb-finance';
-import useTombFinance from '../../hooks/useTombFinance';
+import useBombFinance from '../../hooks/useBombFinance';
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -65,7 +65,7 @@ const Bank: React.FC = () => {
             <Card className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
                 <Typography>TVL</Typography>
-                <Typography>${statsOnPool?.TVL}</Typography>
+                <Typography>${statsOnPool?.TVL }</Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -100,14 +100,14 @@ const Bank: React.FC = () => {
 };
 
 const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const bombAddr = bombFinance.BOMB.address;
   const bshareAddr = bombFinance.BSHARE.address;
 
   let pairName: string;
   let uniswapUrl: string;
   if (bank.depositTokenName.includes('BOMB')) {
-    pairName = 'BOMB-BTC pair';
+    pairName = 'BOMB-BTCB pair';
     uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
   } else {
     pairName = 'BSHARE-BNB pair';

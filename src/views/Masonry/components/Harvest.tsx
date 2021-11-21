@@ -12,11 +12,11 @@ import useClaimRewardCheck from '../../../hooks/masonry/useClaimRewardCheck';
 import ProgressCountdown from './../components/ProgressCountdown';
 import useHarvestFromMasonry from '../../../hooks/useHarvestFromMasonry';
 import useEarningsOnMasonry from '../../../hooks/useEarningsOnMasonry';
-import useTombStats from '../../../hooks/useTombStats';
+import useBombStats from '../../../hooks/useBombStats';
 import { getDisplayBalance } from '../../../utils/formatBalance';
 
 const Harvest: React.FC = () => {
-  const bombStats = useTombStats();
+  const bombStats = useBombStats();
   const { onReward } = useHarvestFromMasonry();
   const earnings = useEarningsOnMasonry();
   const canClaimReward = useClaimRewardCheck();

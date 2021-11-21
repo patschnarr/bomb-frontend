@@ -10,7 +10,7 @@ import ExchangeCard from './components/ExchangeCard';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useBondStats from '../../hooks/useBondStats';
-import useTombFinance from '../../hooks/useTombFinance';
+import useBombFinance from '../../hooks/useBombFinance';
 import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
 import { useTransactionAdder } from '../../state/transactions/hooks';
 import ExchangeStat from './components/ExchangeStat';
@@ -29,7 +29,7 @@ const BackgroundImage = createGlobalStyle`
 const Pit: React.FC = () => {
   const { path } = useRouteMatch();
   const { account } = useWallet();
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
   const cashPrice = useCashPriceInLastTWAP();
@@ -106,7 +106,7 @@ const Pit: React.FC = () => {
                   priceDesc={`${getDisplayBalance(bondBalance)} BBOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when BOMB > ${BOND_REDEEM_PRICE}FTM` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when BOMB > ${BOND_REDEEM_PRICE}BNB` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

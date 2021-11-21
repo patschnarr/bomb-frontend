@@ -1,11 +1,11 @@
 import { useCallback, useState, useEffect } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import { Bank } from '../bomb-finance';
 import { PoolStats } from '../bomb-finance/types';
 import config from '../config';
 
 const useStatsForPool = (bank: Bank) => {
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   const [poolAPRs, setPoolAPRs] = useState<PoolStats>();
 

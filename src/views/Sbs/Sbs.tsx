@@ -9,12 +9,12 @@ import PageHeader from '../../components/PageHeader';
 import { Box,/* Paper, Typography,*/ Button, Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
-import useTombFinance from '../../hooks/useTombFinance';
+import useBombFinance from '../../hooks/useBombFinance';
 import { getDisplayBalance/*, getBalance*/ } from '../../utils/formatBalance';
 import { BigNumber/*, ethers*/ } from 'ethers';
-import useSwapBBondToBShare from '../../hooks/TShareSwapper/useSwapTBondToTShare';
+import useSwapBBondToBShare from '../../hooks/BShareSwapper/useSwapBBondToBShare';
 import useApprove, { ApprovalState } from '../../hooks/useApprove';
-import useBShareSwapperStats from '../../hooks/TShareSwapper/useTShareSwapperStats';
+import useBShareSwapperStats from '../../hooks/BShareSwapper/useBShareSwapperStats';
 import TokenInput from '../../components/TokenInput';
 import Card from '../../components/Card';
 import CardContent from '../../components/CardContent';
@@ -34,9 +34,9 @@ function isNumeric(n: any) {
 const Sbs: React.FC = () => {
   const { path } = useRouteMatch();
   const { account } = useWallet();
-  const bombFinance = useTombFinance();
-  const [bbondAmount, setTbondAmount] = useState('');
-  const [bshareAmount, setTshareAmount] = useState('');
+  const bombFinance = useBombFinance();
+  const [bbondAmount, setBbondAmount] = useState('');
+  const [bshareAmount, setBshareAmount] = useState('');
 
   const [approveStatus, approve] = useApprove(bombFinance.BBOND, bombFinance.contracts.BShareSwapper.address);
   const { onSwapBShare } = useSwapBBondToBShare();
@@ -47,41 +47,41 @@ const Sbs: React.FC = () => {
 
   const handleBBondChange = async (e: any) => {
     if (e.currentTarget.value === '') {
-      setTbondAmount('');
-      setTshareAmount('');
+      setBbondAmount('');
+      setBshareAmount('');
       return
     }
     if (!isNumeric(e.currentTarget.value)) return;
-    setTbondAmount(e.currentTarget.value);
+    setBbondAmount(e.currentTarget.value);
     const updateBShareAmount = await bombFinance.estimateAmountOfBShare(e.currentTarget.value);
-    setTshareAmount(updateBShareAmount);  
+    setBshareAmount(updateBShareAmount);  
   };
 
   const handleBBondSelectMax = async () => {
-    setTbondAmount(String(bondBalance));
+    setBbondAmount(String(bondBalance));
     const updateBShareAmount = await bombFinance.estimateAmountOfBShare(String(bondBalance));
-    setTshareAmount(updateBShareAmount); 
+    setBshareAmount(updateBShareAmount); 
   };
 
   const handleBShareSelectMax = async () => {
-    setTshareAmount(String(bshareBalance));
-    const rateBSharePerTomb = (await bombFinance.getBShareSwapperStat(account)).rateBSharePerTomb;
-    const updateBBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateBSharePerTomb))).mul(Number(bshareBalance) * 1e6);
-    setTbondAmount(getDisplayBalance(updateBBondAmount, 18, 6));
+    setBshareAmount(String(bshareBalance));
+    const rateBSharePerBomb = (await bombFinance.getBShareSwapperStat(account)).rateBSharePerBomb;
+    const updateBBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateBSharePerBomb))).mul(Number(bshareBalance) * 1e6);
+    setBbondAmount(getDisplayBalance(updateBBondAmount, 18, 6));
   };
 
   const handleBShareChange = async (e: any) => {
     const inputData = e.currentTarget.value;
     if (inputData === '') {
-      setTshareAmount('');
-      setTbondAmount('');
+      setBshareAmount('');
+      setBbondAmount('');
       return
     }
     if (!isNumeric(inputData)) return;
-    setTshareAmount(inputData);
-    const rateBSharePerTomb = (await bombFinance.getBShareSwapperStat(account)).rateBSharePerTomb;
-    const updateBBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateBSharePerTomb))).mul(Number(inputData) * 1e6);
-    setTbondAmount(getDisplayBalance(updateBBondAmount, 18, 6));
+    setBshareAmount(inputData);
+    const rateBSharePerBomb = (await bombFinance.getBShareSwapperStat(account)).rateBSharePerBomb;
+    const updateBBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateBSharePerBomb))).mul(Number(inputData) * 1e6);
+    setBbondAmount(getDisplayBalance(updateBBondAmount, 18, 6));
   }
 
   return (

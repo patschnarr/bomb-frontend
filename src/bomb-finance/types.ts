@@ -12,7 +12,6 @@ export interface BankInfo {
   sort: number;
   finished: boolean;
   closedForStaking: boolean;
-  bankId: number;
 }
 
 export interface Bank extends BankInfo {
@@ -52,5 +51,5 @@ export type BShareSwapperStat = {
   bbondBalance: string;
   // bombPrice: string;
   // bsharePrice: string;
-  rateBSharePerTomb: string;
+  rateBSharePerBomb: string;
 };

@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
 import ERC20 from '../bomb-finance/ERC20';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import config from '../config';
 
 const useBondsPurchasable = () => {
   const [balance, setBalance] = useState(BigNumber.from(0));
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   useEffect(() => {
     async function fetchBondsPurchasable() {

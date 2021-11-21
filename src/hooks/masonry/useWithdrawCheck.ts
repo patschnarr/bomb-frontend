@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './../useTombFinance';
+import useBombFinance from './../useBombFinance';
 import useRefresh from '../useRefresh';
 
 const useWithdrawCheck = () => {
   const [canWithdraw, setCanWithdraw] = useState(false);
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const { slowRefresh } = useRefresh();
   const isUnlocked = bombFinance?.isUnlocked;
 

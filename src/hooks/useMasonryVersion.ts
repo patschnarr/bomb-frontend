@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import useStakedBalanceOnMasonry from './useStakedBalanceOnMasonry';
 
 const useMasonryVersion = () => {
   const [masonryVersion, setMasonryVersion] = useState('latest');
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const stakedBalance = useStakedBalanceOnMasonry();
 
   const updateState = useCallback(async () => {

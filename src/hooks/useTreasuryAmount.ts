@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { BigNumber } from 'ethers';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 
 const useTreasuryAmount = () => {
   const [amount, setAmount] = useState(BigNumber.from(0));
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   useEffect(() => {
     if (bombFinance) {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import { TokenStat } from '../bomb-finance/types';
 import useRefresh from './useRefresh';
 
 const useShareStats = () => {
   const [stat, setStat] = useState<TokenStat>();
   const { slowRefresh } = useRefresh();
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
 
   useEffect(() => {
     async function fetchSharePrice() {

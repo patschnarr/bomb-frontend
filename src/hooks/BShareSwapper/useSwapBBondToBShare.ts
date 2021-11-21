@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
-import useTombFinance from '../useTombFinance';
+import useBombFinance from '../useBombFinance';
 import useHandleTransactionReceipt from '../useHandleTransactionReceipt';
 // import { BigNumber } from "ethers";
 import { parseUnits } from 'ethers/lib/utils';
 
 const useSwapBBondToBShare = () => {
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleSwapBShare = useCallback(

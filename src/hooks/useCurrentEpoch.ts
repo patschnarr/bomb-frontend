@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import { BigNumber } from 'ethers';
 import useRefresh from './useRefresh';
 
 const useCurrentEpoch = () => {
   const [currentEpoch, setCurrentEpoch] = useState<BigNumber>(BigNumber.from(0));
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const { slowRefresh } = useRefresh();
 
   useEffect(() => {

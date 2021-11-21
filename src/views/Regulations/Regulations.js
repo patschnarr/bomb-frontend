@@ -6,7 +6,7 @@ import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import Page from '../../components/Page';
 import RegulationsImage from '../../assets/img/regulations_bg.png';
 import { createGlobalStyle } from 'styled-components';
-import useTombFinance from '../../hooks/useTombFinance';
+import useBombFinance from '../../hooks/useBombFinance';
 
 const BackgroundImage = createGlobalStyle`
   body, html {
@@ -45,7 +45,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const Regulations = () => {
   const classes = useStyles();
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const [rows, setRows] = useState(null);
   function createData(epoch, dao, dev, masonry, bondsBought, bondsRedeemed) {
     var sum = (Number(dao) + Number(dev) + Number(masonry)).toFixed(2);

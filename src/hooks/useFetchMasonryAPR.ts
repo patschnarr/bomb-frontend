@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import useTombFinance from './useTombFinance';
+import useBombFinance from './useBombFinance';
 import useRefresh from './useRefresh';
 
 const useFetchMasonryAPR = () => {
   const [apr, setApr] = useState<number>(0);
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const { slowRefresh } = useRefresh();
 
   useEffect(() => {

@@ -21,7 +21,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
-import useTombFinance from '../../../hooks/useTombFinance';
+import useBombFinance from '../../../hooks/useBombFinance';
 import ProgressCountdown from './../components/ProgressCountdown';
 import useStakedBalanceOnMasonry from '../../../hooks/useStakedBalanceOnMasonry';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
@@ -31,7 +31,7 @@ import useStakeToMasonry from '../../../hooks/useStakeToMasonry';
 import useWithdrawFromMasonry from '../../../hooks/useWithdrawFromMasonry';
 
 const Stake: React.FC = () => {
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const [approveStatus, approve] = useApprove(bombFinance.BSHARE, bombFinance.contracts.Masonry.address);
 
   const tokenBalance = useTokenBalance(bombFinance.BSHARE);

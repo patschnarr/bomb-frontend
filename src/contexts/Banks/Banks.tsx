@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Context from './context';
-import useTombFinance from '../../hooks/useTombFinance';
+import useBombFinance from '../../hooks/useBombFinance';
 import { Bank } from '../../bomb-finance';
 import config, { bankDefinitions } from '../../config';
 
 const Banks: React.FC = ({ children }) => {
   const [banks, setBanks] = useState<Bank[]>([]);
-  const bombFinance = useTombFinance();
+  const bombFinance = useBombFinance();
   const isUnlocked = bombFinance?.isUnlocked;
 
   const fetchPools = useCallback(async () => {

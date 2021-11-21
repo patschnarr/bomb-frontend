@@ -15,7 +15,7 @@ import useHarvest from '../../../hooks/useHarvest';
 import { getDisplayBalance } from '../../../utils/formatBalance';
 import TokenSymbol from '../../../components/TokenSymbol';
 import { Bank } from '../../../bomb-finance';
-import useTombStats from '../../../hooks/useTombStats';
+import useBombStats from '../../../hooks/useBombStats';
 import useShareStats from '../../../hooks/usetShareStats';
 
 interface HarvestProps {
@@ -25,7 +25,7 @@ interface HarvestProps {
 const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const earnings = useEarnings(bank.contract, bank.earnTokenName, bank.poolId);
   const { onReward } = useHarvest(bank);
-  const bombStats = useTombStats();
+  const bombStats = useBombStats();
   const tShareStats = useShareStats();
 
   const tokenName = bank.earnTokenName === 'BSHARE' ? 'BSHARE' : 'BOMB';
