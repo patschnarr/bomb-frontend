@@ -246,7 +246,7 @@ const Home = () => {
                   <TokenSymbol symbol="BOMB" />
                 </CardIcon>
               </Box>
-              10,000 BOMB Needs 1.0 Peg:
+              10,000 BOMB (1.0 Peg) =
               <Box>
                 <span style={{ fontSize: '30px' }}>{bombPriceInBNB ? bombPriceInBNB : '-.----'} BTC</span>
               </Box>

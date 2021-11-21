@@ -89,9 +89,12 @@ const Boardroom = () => {
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
                     <Typography>
-                      BOMB Price<small>(TWAP)</small>
+                      BOMB PEG <small>(TWAP)</small>
                     </Typography>
-                    <Typography>{scalingFactor}</Typography>
+                    <Typography>{scalingFactor} BTC</Typography>
+                    <Typography>
+                      <small>per 10,000 BOMB</small>
+                    </Typography>
                   </CardContent>
                 </Card>
               </Grid>
