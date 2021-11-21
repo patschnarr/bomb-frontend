@@ -1,7 +1,10 @@
 {
-  "name": "bomb.money",
-  "version": "0.1.0",
-  "private": true,
+  "name": "bomb-frontend",
+  "version": "1.0.0",
+  "repository": "https://github.com/bombmoney/bomb-frontend.git",
+  "private": false,
+  "author": "Aaron <aaron@1coin.io>",
+  "license": "MIT",
   "dependencies": {
     "@ethersproject/providers": "^5.4.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
