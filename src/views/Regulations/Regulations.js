@@ -47,9 +47,9 @@ const Regulations = () => {
   const classes = useStyles();
   const bombFinance = useBombFinance();
   const [rows, setRows] = useState(null);
-  function createData(epoch, dao, dev, masonry, bondsBought, bondsRedeemed) {
-    var sum = (Number(dao) + Number(dev) + Number(masonry)).toFixed(2);
-    return { epoch, dao, dev, masonry, sum, bondsBought, bondsRedeemed };
+  function createData(epoch, dao, dev, boardroom, bondsBought, bondsRedeemed) {
+    var sum = (Number(dao) + Number(dev) + Number(boardroom)).toFixed(2);
+    return { epoch, dao, dev, boardroom, sum, bondsBought, bondsRedeemed };
   }
   useEffect(() => {
     if (bombFinance) {
@@ -63,7 +63,7 @@ const Regulations = () => {
                 element.epoch,
                 element.daoFund,
                 element.devFund,
-                element.masonryFund,
+                element.boardroomFund,
                 element.bondsBought,
                 element.bondsRedeemed,
               ),
@@ -84,7 +84,7 @@ const Regulations = () => {
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">Epoch</StyledTableCell>
-              <StyledTableCell align="center">Masonry funding</StyledTableCell>
+              <StyledTableCell align="center">Boardroom funding</StyledTableCell>
               <StyledTableCell align="center">DAO funding</StyledTableCell>
               <StyledTableCell align="center">DEV funding</StyledTableCell>
               <StyledTableCell align="center">Total</StyledTableCell>
@@ -101,7 +101,7 @@ const Regulations = () => {
                 <StyledTableCell style={{ color: '#2c2560' }} align="center" component="th" scope="row">
                   {row.epoch}
                 </StyledTableCell>
-                <StyledTableCell align="center">{row.masonry}</StyledTableCell>
+                <StyledTableCell align="center">{row.boardroom}</StyledTableCell>
                 <StyledTableCell align="center">{row.dao}</StyledTableCell>
                 <StyledTableCell align="center">{row.dev}</StyledTableCell>
                 <StyledTableCell align="center">{row.sum}</StyledTableCell>

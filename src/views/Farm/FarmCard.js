@@ -4,7 +4,7 @@ import { Box, Button, Card, CardActions, CardContent, Typography, Grid } from '@
 
 import TokenSymbol from '../../components/TokenSymbol';
 
-const CemeteryCard = ({ bank }) => {
+const FarmCard = ({ bank }) => {
   return (
     <Grid item xs={12} md={4} lg={4}>
       <Card variant="outlined">
@@ -36,7 +36,7 @@ const CemeteryCard = ({ bank }) => {
           </Box>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-          <Button color="primary" size="small" variant="contained" component={Link} to={`/cemetery/${bank.contract}`}>
+          <Button color="primary" size="small" variant="contained" component={Link} to={`/farm/${bank.contract}`}>
             View
           </Button>
         </CardActions>
@@ -45,4 +45,4 @@ const CemeteryCard = ({ bank }) => {
   );
 };
 
-export default CemeteryCard;
+export default FarmCard;

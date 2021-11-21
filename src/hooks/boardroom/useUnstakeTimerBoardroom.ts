@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import useBombFinance from './../useBombFinance';
+import useBombFinance from '../useBombFinance';
 import { AllocationTime } from '../../bomb-finance/types';
 
-const useUnstakeTimerMasonry = () => {
+const useUnstakeTimerBoardroom = () => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
@@ -17,4 +17,4 @@ const useUnstakeTimerMasonry = () => {
   return time;
 };
 
-export default useUnstakeTimerMasonry;
+export default useUnstakeTimerBoardroom;

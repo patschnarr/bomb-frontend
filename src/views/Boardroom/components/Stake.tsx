@@ -15,28 +15,28 @@ import Value from '../../../components/Value';
 import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import useWithdrawCheck from '../../../hooks/masonry/useWithdrawCheck';
+import useWithdrawCheck from '../../../hooks/boardroom/useWithdrawCheck';
 
 import { getDisplayBalance } from '../../../utils/formatBalance';
 
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
 import useBombFinance from '../../../hooks/useBombFinance';
-import ProgressCountdown from './../components/ProgressCountdown';
-import useStakedBalanceOnMasonry from '../../../hooks/useStakedBalanceOnMasonry';
+import ProgressCountdown from './ProgressCountdown';
+import useStakedBalanceOnBoardroom from '../../../hooks/useStakedBalanceOnBoardroom';
 import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';
-import useUnstakeTimerMasonry from '../../../hooks/masonry/useUnstakeTimerMasonry';
+import useUnstakeTimerBoardroom from '../../../hooks/boardroom/useUnstakeTimerBoardroom';
 import TokenSymbol from '../../../components/TokenSymbol';
-import useStakeToMasonry from '../../../hooks/useStakeToMasonry';
-import useWithdrawFromMasonry from '../../../hooks/useWithdrawFromMasonry';
+import useStakeToBoardroom from '../../../hooks/useStakeToBoardroom';
+import useWithdrawFromBoardroom from '../../../hooks/useWithdrawFromBoardroom';
 
 const Stake: React.FC = () => {
   const bombFinance = useBombFinance();
   const [approveStatus, approve] = useApprove(bombFinance.BSHARE, bombFinance.contracts.Boardroom.address);
 
   const tokenBalance = useTokenBalance(bombFinance.BSHARE);
-  const stakedBalance = useStakedBalanceOnMasonry();
-  const { from, to } = useUnstakeTimerMasonry();
+  const stakedBalance = useStakedBalanceOnBoardroom();
+  const { from, to } = useUnstakeTimerBoardroom();
 
   const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('BSHARE', bombFinance.BSHARE);
   const tokenPriceInDollars = useMemo(
@@ -48,9 +48,9 @@ const Stake: React.FC = () => {
   );
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const { onStake } = useStakeToMasonry();
-  const { onWithdraw } = useWithdrawFromMasonry();
-  const canWithdrawFromMasonry = useWithdrawCheck();
+  const { onStake } = useStakeToBoardroom();
+  const { onWithdraw } = useWithdrawFromBoardroom();
+  const canWithdrawFromBoardroom = useWithdrawCheck();
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
@@ -100,7 +100,7 @@ const Stake: React.FC = () => {
                 </Button>
               ) : (
                 <>
-                  <IconButton disabled={!canWithdrawFromMasonry} onClick={onPresentWithdraw}>
+                  <IconButton disabled={!canWithdrawFromBoardroom} onClick={onPresentWithdraw}>
                     <RemoveIcon />
                   </IconButton>
                   <StyledActionSpacer />
@@ -114,7 +114,7 @@ const Stake: React.FC = () => {
         </CardContent>
       </Card>
       <Box mt={2} style={{ color: '#FFF' }}>
-        {canWithdrawFromMasonry ? (
+        {canWithdrawFromBoardroom ? (
           ''
         ) : (
           <Card>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import useBombFinance from './../useBombFinance';
+import useBombFinance from '../useBombFinance';
 import useRefresh from '../useRefresh';
 
 const useWithdrawCheck = () => {
@@ -11,7 +11,7 @@ const useWithdrawCheck = () => {
   useEffect(() => {
     async function canUserWithdraw() {
       try {
-        setCanWithdraw(await bombFinance.canUserUnstakeFromMasonry());
+        setCanWithdraw(await bombFinance.canUserUnstakeFromBoardroom());
       } catch (err) {
         console.error(err);
       }

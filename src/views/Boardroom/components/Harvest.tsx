@@ -7,18 +7,18 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 import CardIcon from '../../../components/CardIcon';
-import useClaimRewardTimerMasonry from '../../../hooks/masonry/useClaimRewardTimerMasonry';
-import useClaimRewardCheck from '../../../hooks/masonry/useClaimRewardCheck';
-import ProgressCountdown from './../components/ProgressCountdown';
-import useHarvestFromMasonry from '../../../hooks/useHarvestFromMasonry';
-import useEarningsOnMasonry from '../../../hooks/useEarningsOnMasonry';
+import useClaimRewardTimerBoardroom from '../../../hooks/boardroom/useClaimRewardTimerBoardroom';
+import useClaimRewardCheck from '../../../hooks/boardroom/useClaimRewardCheck';
+import ProgressCountdown from './ProgressCountdown';
+import useHarvestFromBoardroom from '../../../hooks/useHarvestFromBoardroom';
+import useEarningsOnBoardroom from '../../../hooks/useEarningsOnBoardroom';
 import useBombStats from '../../../hooks/useBombStats';
 import { getDisplayBalance } from '../../../utils/formatBalance';
 
 const Harvest: React.FC = () => {
   const bombStats = useBombStats();
-  const { onReward } = useHarvestFromMasonry();
-  const earnings = useEarningsOnMasonry();
+  const { onReward } = useHarvestFromBoardroom();
+  const earnings = useEarningsOnBoardroom();
   const canClaimReward = useClaimRewardCheck();
 
   const tokenPriceInDollars = useMemo(
@@ -28,7 +28,7 @@ const Harvest: React.FC = () => {
 
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
 
-  const { from, to } = useClaimRewardTimerMasonry();
+  const { from, to } = useClaimRewardTimerBoardroom();
 
   return (
     <Box>

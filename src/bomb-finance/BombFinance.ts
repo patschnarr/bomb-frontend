@@ -25,9 +25,9 @@ export class BombFinance {
   config: Configuration;
   contracts: { [name: string]: Contract };
   externalTokens: { [name: string]: ERC20 };
-  masonryVersionOfUser?: string;
+  boardroomVersionOfUser?: string;
 
-  BOMBBTC_LP: Contract;
+  BOMBBTCB_LP: Contract;
   BOMB: ERC20;
   BSHARE: ERC20;
   BBOND: ERC20;
@@ -54,7 +54,7 @@ export class BombFinance {
     this.BTC = this.externalTokens['BTCB'];
 
     // Uniswap V2 Pair
-    this.BOMBBTC_LP = new Contract(externalTokens['BOMB-BTCB-LP'][0], IUniswapV2PairABI, provider);
+    this.BOMBBTCB_LP = new Contract(externalTokens['BOMB-BTCB-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -75,13 +75,13 @@ export class BombFinance {
     for (const token of tokens) {
       token.connect(this.signer);
     }
-    this.BOMBBTC_LP = this.BOMBBTC_LP.connect(this.signer);
+    this.BOMBBTCB_LP = this.BOMBBTCB_LP.connect(this.signer);
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
-    this.fetchMasonryVersionOfUser()
-      .then((version) => (this.masonryVersionOfUser = version))
+    this.fetchBoardroomVersionOfUser()
+      .then((version) => (this.boardroomVersionOfUser = version))
       .catch((err) => {
-        console.error(`Failed to fetch masonry version: ${err.stack}`);
-        this.masonryVersionOfUser = 'latest';
+        console.error(`Failed to fetch boardroom version: ${err.stack}`);
+        this.boardroomVersionOfUser = 'latest';
       });
   }
 
@@ -370,10 +370,10 @@ export class BombFinance {
     }
 
     const BSHAREPrice = (await this.getShareStat()).priceInDollars;
-    const masonrytShareBalanceOf = await this.BSHARE.balanceOf(this.currentMasonry().address);
-    const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.BSHARE.decimal)) * Number(BSHAREPrice);
+    const boardroomtShareBalanceOf = await this.BSHARE.balanceOf(this.currentBoardroom().address);
+    const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalanceOf, this.BSHARE.decimal)) * Number(BSHAREPrice);
 
-    return totalValue + masonryTVL;
+    return totalValue + boardroomTVL;
   }
 
   /**
@@ -466,19 +466,19 @@ export class BombFinance {
     return await pool.withdraw(poolId, userInfo.amount);
   }
 
-  async fetchMasonryVersionOfUser(): Promise<string> {
+  async fetchBoardroomVersionOfUser(): Promise<string> {
     return 'latest';
   }
 
-  currentMasonry(): Contract {
-    if (!this.masonryVersionOfUser) {
+  currentBoardroom(): Contract {
+    if (!this.boardroomVersionOfUser) {
       //throw new Error('you must unlock the wallet to continue.');
     }
     return this.contracts.Boardroom;
   }
 
-  isOldMasonryMember(): boolean {
-    return this.masonryVersionOfUser !== 'latest';
+  isOldBoardroomMember(): boolean {
+    return this.boardroomVersionOfUser !== 'latest';
   }
 
   async getTokenPriceFromPancakeswap(tokenContract: ERC20): Promise<string> {
@@ -561,10 +561,10 @@ export class BombFinance {
   //===================================================================
   //===================================================================
 
-  async getMasonryAPR() {
-    const Masonry = this.currentMasonry();
-    const latestSnapshotIndex = await Masonry.latestSnapshotIndex();
-    const lastHistory = await Masonry.boardroomHistory(latestSnapshotIndex);
+  async getBoardroomAPR() {
+    const Boardroom = this.currentBoardroom();
+    const latestSnapshotIndex = await Boardroom.latestSnapshotIndex();
+    const lastHistory = await Boardroom.boardroomHistory(latestSnapshotIndex);
 
     const lastRewardsReceived = lastHistory[1];
 
@@ -574,85 +574,85 @@ export class BombFinance {
 
     //Mgod formula
     const amountOfRewardsPerDay = epochRewardsPerShare * Number(BOMBPrice) * 4;
-    const masonrytShareBalanceOf = await this.BSHARE.balanceOf(Masonry.address);
-    const masonryTVL = Number(getDisplayBalance(masonrytShareBalanceOf, this.BSHARE.decimal)) * Number(BSHAREPrice);
-    const realAPR = ((amountOfRewardsPerDay * 100) / masonryTVL) * 365;
+    const boardroomtShareBalanceOf = await this.BSHARE.balanceOf(Boardroom.address);
+    const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalanceOf, this.BSHARE.decimal)) * Number(BSHAREPrice);
+    const realAPR = ((amountOfRewardsPerDay * 100) / boardroomTVL) * 365;
     return realAPR;
   }
 
   /**
-   * Checks if the user is allowed to retrieve their reward from the Masonry
+   * Checks if the user is allowed to retrieve their reward from the Boardroom
    * @returns true if user can withdraw reward, false if they can't
    */
-  async canUserClaimRewardFromMasonry(): Promise<boolean> {
-    const Masonry = this.currentMasonry();
-    return await Masonry.canClaimReward(this.myAccount);
+  async canUserClaimRewardFromBoardroom(): Promise<boolean> {
+    const Boardroom = this.currentBoardroom();
+    return await Boardroom.canClaimReward(this.myAccount);
   }
 
   /**
-   * Checks if the user is allowed to retrieve their reward from the Masonry
+   * Checks if the user is allowed to retrieve their reward from the Boardroom
    * @returns true if user can withdraw reward, false if they can't
    */
-  async canUserUnstakeFromMasonry(): Promise<boolean> {
-    const Masonry = this.currentMasonry();
-    const canWithdraw = await Masonry.canWithdraw(this.myAccount);
-    const stakedAmount = await this.getStakedSharesOnMasonry();
+  async canUserUnstakeFromBoardroom(): Promise<boolean> {
+    const Boardroom = this.currentBoardroom();
+    const canWithdraw = await Boardroom.canWithdraw(this.myAccount);
+    const stakedAmount = await this.getStakedSharesOnBoardroom();
     const notStaked = Number(getDisplayBalance(stakedAmount, this.BSHARE.decimal)) === 0;
     const result = notStaked ? true : canWithdraw;
     return result;
   }
 
-  async timeUntilClaimRewardFromMasonry(): Promise<BigNumber> {
-    // const Masonry = this.currentMasonry();
-    // const mason = await Masonry.masons(this.myAccount);
+  async timeUntilClaimRewardFromBoardroom(): Promise<BigNumber> {
+    // const Boardroom = this.currentBoardroom();
+    // const mason = await Boardroom.masons(this.myAccount);
     return BigNumber.from(0);
   }
 
-  async getTotalStakedInMasonry(): Promise<BigNumber> {
-    const Masonry = this.currentMasonry();
-    return await Masonry.totalSupply();
+  async getTotalStakedInBoardroom(): Promise<BigNumber> {
+    const Boardroom = this.currentBoardroom();
+    return await Boardroom.totalSupply();
   }
 
-  async stakeShareToMasonry(amount: string): Promise<TransactionResponse> {
-    if (this.isOldMasonryMember()) {
-      throw new Error("you're using old masonry. please withdraw and deposit the BSHARE again.");
+  async stakeShareToBoardroom(amount: string): Promise<TransactionResponse> {
+    if (this.isOldBoardroomMember()) {
+      throw new Error("you're using old boardroom. please withdraw and deposit the BSHARE again.");
     }
-    const Masonry = this.currentMasonry();
-    return await Masonry.stake(decimalToBalance(amount));
+    const Boardroom = this.currentBoardroom();
+    return await Boardroom.stake(decimalToBalance(amount));
   }
 
-  async getStakedSharesOnMasonry(): Promise<BigNumber> {
-    const Masonry = this.currentMasonry();
-    if (this.masonryVersionOfUser === 'v1') {
-      return await Masonry.getShareOf(this.myAccount);
+  async getStakedSharesOnBoardroom(): Promise<BigNumber> {
+    const Boardroom = this.currentBoardroom();
+    if (this.boardroomVersionOfUser === 'v1') {
+      return await Boardroom.getShareOf(this.myAccount);
     }
-    return await Masonry.balanceOf(this.myAccount);
+    return await Boardroom.balanceOf(this.myAccount);
   }
 
-  async getEarningsOnMasonry(): Promise<BigNumber> {
-    const Masonry = this.currentMasonry();
-    if (this.masonryVersionOfUser === 'v1') {
-      return await Masonry.getCashEarningsOf(this.myAccount);
+  async getEarningsOnBoardroom(): Promise<BigNumber> {
+    const Boardroom = this.currentBoardroom();
+    if (this.boardroomVersionOfUser === 'v1') {
+      return await Boardroom.getCashEarningsOf(this.myAccount);
     }
-    return await Masonry.earned(this.myAccount);
+    return await Boardroom.earned(this.myAccount);
   }
 
-  async withdrawShareFromMasonry(amount: string): Promise<TransactionResponse> {
-    const Masonry = this.currentMasonry();
-    return await Masonry.withdraw(decimalToBalance(amount));
+  async withdrawShareFromBoardroom(amount: string): Promise<TransactionResponse> {
+    const Boardroom = this.currentBoardroom();
+    return await Boardroom.withdraw(decimalToBalance(amount));
   }
 
-  async harvestCashFromMasonry(): Promise<TransactionResponse> {
-    const Masonry = this.currentMasonry();
-    if (this.masonryVersionOfUser === 'v1') {
-      return await Masonry.claimDividends();
+  async harvestCashFromBoardroom(): Promise<TransactionResponse> {
+    const Boardroom = this.currentBoardroom();
+    if (this.boardroomVersionOfUser === 'v1') {
+      return await Boardroom.claimDividends();
     }
-    return await Masonry.claimReward();
+    return await Boardroom.claimReward();
   }
 
-  async exitFromMasonry(): Promise<TransactionResponse> {
-    const Masonry = this.currentMasonry();
-    return await Masonry.exit();
+  async exitFromBoardroom(): Promise<TransactionResponse> {
+    const Boardroom = this.currentBoardroom();
+    return await Boardroom.exit();
   }
 
   async getTreasuryNextAllocationTime(): Promise<AllocationTime> {
@@ -666,7 +666,7 @@ export class BombFinance {
   /**
    * This method calculates and returns in a from to to format
    * the period the user needs to wait before being allowed to claim
-   * their reward from the masonry
+   * their reward from the boardroom
    * @returns Promise<AllocationTime>
    */
   async getUserClaimRewardTime(): Promise<AllocationTime> {
@@ -699,7 +699,7 @@ export class BombFinance {
   /**
    * This method calculates and returns in a from to to format
    * the period the user needs to wait before being allowed to unstake
-   * from the masonry
+   * from the boardroom
    * @returns Promise<AllocationTime>
    */
   async getUserUnstakeTime(): Promise<AllocationTime> {
@@ -713,7 +713,7 @@ export class BombFinance {
     const withdrawLockupEpochs = await Boardroom.withdrawLockupEpochs();
     const fromDate = new Date(Date.now());
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(withdrawLockupEpochs);
-    const stakedAmount = await this.getStakedSharesOnMasonry();
+    const stakedAmount = await this.getStakedSharesOnBoardroom();
     if (currentEpoch <= targetEpochForClaimUnlock && Number(stakedAmount) === 0) {
       return { from: fromDate, to: fromDate };
     } else if (targetEpochForClaimUnlock - currentEpoch === 1) {
@@ -775,7 +775,7 @@ export class BombFinance {
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {
     const { SpookyRouter } = this.contracts;
-    const { _reserve0, _reserve1 } = await this.BOMBBTC_LP.getReserves();
+    const { _reserve0, _reserve1 } = await this.BOMBBTCB_LP.getReserves();
     let quote;
     if (tokenName === 'BOMB') {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve1, _reserve0);
@@ -793,16 +793,16 @@ export class BombFinance {
 
     const treasuryDaoFundedFilter = Treasury.filters.DaoFundFunded();
     const treasuryDevFundedFilter = Treasury.filters.DevFundFunded();
-    const treasuryMasonryFundedFilter = Treasury.filters.MasonryFunded();
+    const treasuryBoardroomFundedFilter = Treasury.filters.BoardroomFunded();
     const boughtBondsFilter = Treasury.filters.BoughtBonds();
     const redeemBondsFilter = Treasury.filters.RedeemedBonds();
 
     let epochBlocksRanges: any[] = [];
-    let masonryFundEvents = await Treasury.queryFilter(treasuryMasonryFundedFilter);
+    let boardroomFundEvents = await Treasury.queryFilter(treasuryBoardroomFundedFilter);
     var events: any[] = [];
-    masonryFundEvents.forEach(function callback(value, index) {
+    boardroomFundEvents.forEach(function callback(value, index) {
       events.push({ epoch: index + 1 });
-      events[index].masonryFund = getDisplayBalance(value.args[1]);
+      events[index].boardroomFund = getDisplayBalance(value.args[1]);
       if (index === 0) {
         epochBlocksRanges.push({
           index: index,

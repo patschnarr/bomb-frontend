@@ -9,20 +9,20 @@ import { Alert } from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
-import CemeteryCard from './CemeteryCard';
-import CemeteryImage from '../../assets/img/cemetery.png';
+import FarmCard from './FarmCard';
+import FarmImage from '../../assets/img/farm.png';
 import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
 
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${CemeteryImage}) no-repeat !important;
+    background: url(${FarmImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
 
-const Cemetery = () => {
+const Farm = () => {
   const [banks] = useBanks();
   const { path } = useRouteMatch();
   const { account } = useWallet();
@@ -35,7 +35,7 @@ const Cemetery = () => {
           {!!account ? (
             <Container maxWidth="lg">
               <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-                Cemetery
+                Farm
               </Typography>
 
               <Box mt={5}>
@@ -48,7 +48,7 @@ const Cemetery = () => {
                       .filter((bank) => bank.sectionInUI === 2)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
+                          <FarmCard bank={bank} />
                         </React.Fragment>
                       ))}
                   </Grid>
@@ -66,7 +66,7 @@ const Cemetery = () => {
                       .filter((bank) => bank.sectionInUI === 1)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
+                          <FarmCard bank={bank} />
                         </React.Fragment>
                       ))}
                   </Grid>
@@ -81,7 +81,7 @@ const Cemetery = () => {
                       .filter((bank) => bank.sectionInUI === 0)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
-                          <CemeteryCard bank={bank} />
+                          <FarmCard bank={bank} />
                         </React.Fragment>
                       ))}
                   </Grid>
@@ -101,4 +101,4 @@ const Cemetery = () => {
   );
 };
 
-export default Cemetery;
+export default Farm;

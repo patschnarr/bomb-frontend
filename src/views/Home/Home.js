@@ -100,44 +100,55 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const bombLpZap = useZap({ depositTokenName: 'BOMB-BTCB-LP' });
-  const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-LP' });
+  // const bombLpZap = useZap({ depositTokenName: 'BOMB-BTCB-LP' });
+  // const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-LP' });
 
-  const StyledLink = styled.a`
-    font-weight: 700;
-    text-decoration: none;
-  `;
+  // const StyledLink = styled.a`
+  //   font-weight: 700;
+  //   text-decoration: none;
+  // `;
 
-  const [onPresentBombZap, onDissmissBombZap] = useModal(
-    <ZapModal
-      decimals={18}
-      onConfirm={(zappingToken, tokenName, amount) => {
-        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-        bombLpZap.onZap(zappingToken, tokenName, amount);
-        onDissmissBombZap();
-      }}
-      tokenName={'BOMB-BTCB-LP'}
-    />,
-  );
+  // const [onPresentBombZap, onDissmissBombZap] = useModal(
+  //   <ZapModal
+  //     decimals={18}
+  //     onConfirm={(zappingToken, tokenName, amount) => {
+  //       if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+  //       bombLpZap.onZap(zappingToken, tokenName, amount);
+  //       onDissmissBombZap();
+  //     }}
+  //     tokenName={'BOMB-BTCB-LP'}
+  //   />,
+  // );
 
-  const [onPresentBshareZap, onDissmissBshareZap] = useModal(
-    <ZapModal
-      decimals={18}
-      onConfirm={(zappingToken, tokenName, amount) => {
-        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-        bshareLpZap.onZap(zappingToken, tokenName, amount);
-        onDissmissBshareZap();
-      }}
-      tokenName={'BSHARE-BNB-LP'}
-    />,
-  );
+  // const [onPresentBshareZap, onDissmissBshareZap] = useModal(
+  //   <ZapModal
+  //     decimals={18}
+  //     onConfirm={(zappingToken, tokenName, amount) => {
+  //       if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+  //       bshareLpZap.onZap(zappingToken, tokenName, amount);
+  //       onDissmissBshareZap();
+  //     }}
+  //     tokenName={'BSHARE-BNB-LP'}
+  //   />,
+  // );
 
   return (
     <Page>
       <BackgroundImage />
       <Grid container spacing={3}>
         {/* Logo */}
-        <Grid container item xs={12} sm={4} justify="center">
+        <Grid item xs={12} sm={4}>
+          <Paper>
+            <Box p={4}>
+              <h2>Schedule</h2>
+              <ul>
+                <li><strong>Genesis:</strong> Nov21 23:00 UTC - 24 hrs</li>
+                <li><strong>Bomb:</strong> Nov22 23:00 UTC - 5 days</li>
+                <li><strong>BSHARE:</strong> Nov 27 23:00 UTC - 365 days</li>
+                <li><strong>Boardroom:</strong> Dec1 00:00 UTC</li>
+              </ul>
+            </Box>
+          </Paper>
           {/* <Paper>xs=6 sm=3</Paper> */}
           {/* <Image color="none" style={{ width: '300px', paddingTop: '0px' }} src={CashImage} /> */}
         </Grid>
@@ -148,7 +159,7 @@ const Home = () => {
               <h2>Welcome to Bomb Money</h2>
               <p>The first algorithmic stablecoin on Binance Smart Chain, pegged to the <br />price of 10,000 BOMB : 1 BTC via seigniorage.</p>
               <p>
-                Stake your BOMB-BTC LP in the Cemetery to earn BSHARE rewards.
+                Stake your BOMB-BTC LP in the Farm to earn BSHARE rewards.
                 Then stake your earned BSHARE in the Boardroom to earn more BOMB!
               </p>
             </Box>
@@ -182,10 +193,10 @@ const Home = () => {
           <Card style={{ height: '100%' }}>
             <CardContent align="center" style={{ marginTop: '2.5%' }}>
               {/* <h2 style={{ marginBottom: '20px' }}>Wallet Balance</h2> */}
-              <Button color="primary" href="/masonry" variant="contained" style={{ marginRight: '10px' }}>
+              <Button color="primary" href="/boardroom" variant="contained" style={{ marginRight: '10px' }}>
                 Stake Now
               </Button>
-              <Button href="/cemetery" variant="contained" style={{ marginRight: '10px' }}>
+              <Button href="/farm" variant="contained" style={{ marginRight: '10px' }}>
                 Farm Now
               </Button>
               <Button
@@ -327,9 +338,9 @@ const Home = () => {
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                <Button color="primary" disabled={true} onClick={onPresentBombZap} variant="contained">
+                {/* <Button color="primary" disabled={true} onClick={onPresentBombZap} variant="contained">
                   Zap In
-                </Button>
+                </Button> */}
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
@@ -355,9 +366,9 @@ const Home = () => {
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                <Button color="primary" onClick={onPresentBshareZap} variant="contained">
+                {/* <Button color="primary" onClick={onPresentBshareZap} variant="contained">
                   Zap In
-                </Button>
+                </Button> */}
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>

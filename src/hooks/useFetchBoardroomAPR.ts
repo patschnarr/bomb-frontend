@@ -2,23 +2,23 @@ import { useEffect, useState } from 'react';
 import useBombFinance from './useBombFinance';
 import useRefresh from './useRefresh';
 
-const useFetchMasonryAPR = () => {
+const useFetchBoardroomAPR = () => {
   const [apr, setApr] = useState<number>(0);
   const bombFinance = useBombFinance();
   const { slowRefresh } = useRefresh();
 
   useEffect(() => {
-    async function fetchMasonryAPR() {
+    async function fetchBoardroomAPR() {
       try {
-        setApr(await bombFinance.getMasonryAPR());
+        setApr(await bombFinance.getBoardroomAPR());
       } catch (err) {
         console.error(err);
       }
     }
-    fetchMasonryAPR();
+    fetchBoardroomAPR();
   }, [setApr, bombFinance, slowRefresh]);
 
   return apr;
 };
 
-export default useFetchMasonryAPR;
+export default useFetchBoardroomAPR;

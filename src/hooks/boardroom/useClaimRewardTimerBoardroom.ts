@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useBombFinance from '../useBombFinance';
 import { AllocationTime } from '../../bomb-finance/types';
 
-const useClaimRewardTimerMasonry = () => {
+const useClaimRewardTimerBoardroom = () => {
   const [time, setTime] = useState<AllocationTime>({
     from: new Date(),
     to: new Date(),
@@ -17,4 +17,4 @@ const useClaimRewardTimerMasonry = () => {
   return time;
 };
 
-export default useClaimRewardTimerMasonry;
+export default useClaimRewardTimerBoardroom;

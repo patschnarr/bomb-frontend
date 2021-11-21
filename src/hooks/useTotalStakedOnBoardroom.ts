@@ -3,7 +3,7 @@ import { BigNumber } from 'ethers';
 import useBombFinance from './useBombFinance';
 import useRefresh from './useRefresh';
 
-const useTotalStakedOnMasonry = () => {
+const useTotalStakedOnBoardroom = () => {
   const [totalStaked, setTotalStaked] = useState(BigNumber.from(0));
   const bombFinance = useBombFinance();
   const { slowRefresh } = useRefresh();
@@ -12,7 +12,7 @@ const useTotalStakedOnMasonry = () => {
   useEffect(() => {
     async function fetchTotalStaked() {
       try {
-        setTotalStaked(await bombFinance.getTotalStakedInMasonry());
+        setTotalStaked(await bombFinance.getTotalStakedInBoardroom());
       } catch (err) {
         console.error(err);
       }
@@ -25,4 +25,4 @@ const useTotalStakedOnMasonry = () => {
   return totalStaked;
 };
 
-export default useTotalStakedOnMasonry;
+export default useTotalStakedOnBoardroom;
