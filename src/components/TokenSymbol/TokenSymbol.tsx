@@ -28,13 +28,13 @@ const logosBySymbol: { [title: string]: string } = {
   SHIBA: shibaLogo,
   ZOO: zooLogo,
   CAKE: bombLogo,
-    SUSD: bombLogo,
-  SBTC:bombLogo,
+  SUSD: bombLogo,
+  SBTC: bombLogo,
   BTCB: bombLogo,
   BTC: bombLogo,
-        SVL: bombLogo,
+  SVL: bombLogo,
   'BOMB-BNB-LP': bombFtmLpLogo,
-    'BOMB-BTCB-LP': bombFtmLpLogo,
+  'BOMB-BTCB-LP': bombFtmLpLogo,
   'BSHARE-BNB-LP': bshareFtmLpLogo,
 };
 

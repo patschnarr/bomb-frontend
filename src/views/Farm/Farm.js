@@ -43,7 +43,10 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom>
                     Earn BSHARE by staking LP
                   </Typography>
-                  <Grid container spacing={3}>
+                  <Alert variant="filled" severity="warning">
+                    BShare farms begin producing rewards: November 25 23:00 UTC
+                  </Alert>
+                  <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
                       .map((bank) => (
@@ -59,7 +62,7 @@ const Farm = () => {
                     Earn BOMB by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    Below pools are in full effect until the system starts December 1st.
+                    Bomb reward pools start November 21st 23:00 UTC
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -76,7 +79,11 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Genesis Pools
                   </Typography>
-                  <Grid container spacing={3}>
+                  <Alert variant="filled" severity="warning">
+                    Genesis pools run for the first 24 hours and will end at the same time the Bomb reward pool above
+                    begins. November 21 23:00 UTC
+                  </Alert>
+                  <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 0)
                       .map((bank) => (

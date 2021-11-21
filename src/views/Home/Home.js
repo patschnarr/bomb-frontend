@@ -63,7 +63,9 @@ const Home = () => {
     tShare = tShareProd;
   }
 
-  const buyBombAddress = 'https://pancakeswap.finance/swap?inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&outputCurrency=' + bomb.address;
+  const buyBombAddress =
+    'https://pancakeswap.finance/swap?inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&outputCurrency=' +
+    bomb.address;
   const buyBShareAddress = 'https://pancakeswap.finance/swap?outputCurrency=0x531780FAcE85306877D7e1F05d713D1B50a37F7A';
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
@@ -143,10 +145,18 @@ const Home = () => {
             <Box p={4}>
               <h2>Schedule</h2>
               <ul>
-                <li><strong>Genesis:</strong> Nov21 23:00 UTC - 24 hrs</li>
-                <li><strong>Bomb:</strong> Nov22 23:00 UTC - 5 days</li>
-                <li><strong>BSHARE:</strong> Nov 27 23:00 UTC - 365 days</li>
-                <li><strong>Boardroom:</strong> Dec1 00:00 UTC</li>
+                <li>
+                  <strong>Genesis Farm:</strong> Nov 21 23:00 - 24 hrs
+                </li>
+                <li>
+                  <strong>Bomb Farm:</strong> Nov 22 23:00 - 5 days
+                </li>
+                <li>
+                  <strong>BSHARE Farm:</strong> Nov 25 23:00 - 365 days
+                </li>
+                <li>
+                  <strong>Boardroom:</strong> Dec 1 00:00
+                </li>
               </ul>
             </Box>
           </Paper>
@@ -158,16 +168,16 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Welcome to Bomb Money</h2>
-              <p>The first algorithmic stablecoin on Binance Smart Chain, pegged to the <br />price of 10,000 BOMB : 1 BTC via seigniorage.</p>
               <p>
-                Stake your BOMB-BTC LP in the Farm to earn BSHARE rewards.
-                Then stake your earned BSHARE in the Boardroom to earn more BOMB!
+                The first algorithmic stablecoin on Binance Smart Chain, pegged to the <br />
+                price of 10,000 BOMB : 1 BTC via seigniorage.
+              </p>
+              <p>
+                Stake your BOMB-BTC LP in the Farm to earn BSHARE rewards. Then stake your earned BSHARE in the
+                Boardroom to earn more BOMB!
               </p>
             </Box>
           </Paper>
-
-
-
         </Grid>
 
         {/* <Grid container spacing={3}>

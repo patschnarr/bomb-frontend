@@ -1,4 +1,4 @@
-import React, { /*useCallback, useEffect, */useMemo, useState } from 'react';
+import React, { /*useCallback, useEffect, */ useMemo, useState } from 'react';
 import Page from '../../components/Page';
 import PitImage from '../../assets/img/pit.png';
 import { createGlobalStyle } from 'styled-components';
@@ -6,12 +6,12 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
 import UnlockWallet from '../../components/UnlockWallet';
 import PageHeader from '../../components/PageHeader';
-import { Box,/* Paper, Typography,*/ Button, Grid } from '@material-ui/core';
+import { Box, /* Paper, Typography,*/ Button, Grid } from '@material-ui/core';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useBombFinance from '../../hooks/useBombFinance';
-import { getDisplayBalance/*, getBalance*/ } from '../../utils/formatBalance';
-import { BigNumber/*, ethers*/ } from 'ethers';
+import { getDisplayBalance /*, getBalance*/ } from '../../utils/formatBalance';
+import { BigNumber /*, ethers*/ } from 'ethers';
 import useSwapBBondToBShare from '../../hooks/BShareSwapper/useSwapBBondToBShare';
 import useApprove, { ApprovalState } from '../../hooks/useApprove';
 import useBShareSwapperStats from '../../hooks/BShareSwapper/useBShareSwapperStats';
@@ -42,31 +42,40 @@ const Sbs: React.FC = () => {
   const { onSwapBShare } = useSwapBBondToBShare();
   const bshareSwapperStat = useBShareSwapperStats(account);
 
-  const bshareBalance = useMemo(() => (bshareSwapperStat ? Number(bshareSwapperStat.bshareBalance) : 0), [bshareSwapperStat]);
-  const bondBalance = useMemo(() => (bshareSwapperStat ? Number(bshareSwapperStat.bbondBalance) : 0), [bshareSwapperStat]);
+  const bshareBalance = useMemo(
+    () => (bshareSwapperStat ? Number(bshareSwapperStat.bshareBalance) : 0),
+    [bshareSwapperStat],
+  );
+  const bondBalance = useMemo(
+    () => (bshareSwapperStat ? Number(bshareSwapperStat.bbondBalance) : 0),
+    [bshareSwapperStat],
+  );
 
   const handleBBondChange = async (e: any) => {
     if (e.currentTarget.value === '') {
       setBbondAmount('');
       setBshareAmount('');
-      return
+      return;
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setBbondAmount(e.currentTarget.value);
     const updateBShareAmount = await bombFinance.estimateAmountOfBShare(e.currentTarget.value);
-    setBshareAmount(updateBShareAmount);  
+    setBshareAmount(updateBShareAmount);
   };
 
   const handleBBondSelectMax = async () => {
     setBbondAmount(String(bondBalance));
     const updateBShareAmount = await bombFinance.estimateAmountOfBShare(String(bondBalance));
-    setBshareAmount(updateBShareAmount); 
+    setBshareAmount(updateBShareAmount);
   };
 
   const handleBShareSelectMax = async () => {
     setBshareAmount(String(bshareBalance));
     const rateBSharePerBomb = (await bombFinance.getBShareSwapperStat(account)).rateBSharePerBomb;
-    const updateBBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateBSharePerBomb))).mul(Number(bshareBalance) * 1e6);
+    const updateBBondAmount = BigNumber.from(10)
+      .pow(30)
+      .div(BigNumber.from(rateBSharePerBomb))
+      .mul(Number(bshareBalance) * 1e6);
     setBbondAmount(getDisplayBalance(updateBBondAmount, 18, 6));
   };
 
@@ -75,14 +84,17 @@ const Sbs: React.FC = () => {
     if (inputData === '') {
       setBshareAmount('');
       setBbondAmount('');
-      return
+      return;
     }
     if (!isNumeric(inputData)) return;
     setBshareAmount(inputData);
     const rateBSharePerBomb = (await bombFinance.getBShareSwapperStat(account)).rateBSharePerBomb;
-    const updateBBondAmount = ((BigNumber.from(10).pow(30)).div(BigNumber.from(rateBSharePerBomb))).mul(Number(inputData) * 1e6);
+    const updateBBondAmount = BigNumber.from(10)
+      .pow(30)
+      .div(BigNumber.from(rateBSharePerBomb))
+      .mul(Number(inputData) * 1e6);
     setBbondAmount(getDisplayBalance(updateBBondAmount, 18, 6));
-  }
+  };
 
   return (
     <Switch>
@@ -123,7 +135,7 @@ const Sbs: React.FC = () => {
                         </CardContent>
                       </Card>
                     </StyledCardWrapper>
-                    <Spacer size="lg"/>
+                    <Spacer size="lg" />
                     <StyledCardWrapper>
                       <Card>
                         <CardContent>
@@ -149,7 +161,6 @@ const Sbs: React.FC = () => {
                           </StyledCardContentInner>
                         </CardContent>
                       </Card>
-              
                     </StyledCardWrapper>
                   </StyledCardsWrapper>
                 </StyledBoardroom>
@@ -162,26 +173,26 @@ const Sbs: React.FC = () => {
                   <Card>
                     <CardContent>
                       <StyledApproveWrapper>
-                      {approveStatus !== ApprovalState.APPROVED ? (
-                        <Button
-                          disabled={approveStatus !== ApprovalState.NOT_APPROVED}
-                          color="primary"
-                          variant="contained"
-                          onClick={approve}
-                          size="medium"
-                        >
-                          Approve BBOND
-                        </Button>
-                      ) : (
-                        <Button
-                          color="primary"
-                          variant="contained"
-                          onClick={() => onSwapBShare(bbondAmount.toString())}
-                          size="medium"
-                        >
-                          Swap
-                        </Button>
-                      )}
+                        {approveStatus !== ApprovalState.APPROVED ? (
+                          <Button
+                            disabled={approveStatus !== ApprovalState.NOT_APPROVED}
+                            color="primary"
+                            variant="contained"
+                            onClick={approve}
+                            size="medium"
+                          >
+                            Approve BBOND
+                          </Button>
+                        ) : (
+                          <Button
+                            color="primary"
+                            variant="contained"
+                            onClick={() => onSwapBShare(bbondAmount.toString())}
+                            size="medium"
+                          >
+                            Swap
+                          </Button>
+                        )}
                       </StyledApproveWrapper>
                     </CardContent>
                   </Card>

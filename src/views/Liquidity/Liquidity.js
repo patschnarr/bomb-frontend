@@ -87,7 +87,13 @@ const ProvideLiquidity = () => {
       <Grid container justify="center">
         <Box style={{ width: '600px' }}>
           <Alert variant="filled" severity="warning" style={{ marginBottom: '10px' }}>
-            <b>This and <a href="https://pancakeswap.finance/" rel="noopener noreferrer" target="_blank">Pancakeswap</a> are the only ways to provide Liquidity on BOMB-BTCB pair without paying tax.</b>
+            <b>
+              This and{' '}
+              <a href="https://pancakeswap.finance/" rel="noopener noreferrer" target="_blank">
+                Pancakeswap
+              </a>{' '}
+              are the only ways to provide Liquidity on BOMB-BTCB pair without paying tax.
+            </b>
           </Alert>
           <Grid item xs={12} sm={12}>
             <Paper>

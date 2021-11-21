@@ -65,7 +65,7 @@ const Bank: React.FC = () => {
             <Card className={classes.gridItem}>
               <CardContent style={{ textAlign: 'center' }}>
                 <Typography>TVL</Typography>
-                <Typography>${statsOnPool?.TVL }</Typography>
+                <Typography>${statsOnPool?.TVL}</Typography>
               </CardContent>
             </Card>
           </Grid>

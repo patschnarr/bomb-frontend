@@ -12,9 +12,7 @@ interface TokenInputProps extends InputProps {
 const PercentInput: React.FC<TokenInputProps> = ({ label, onChange, onSelectMax, value }) => {
   return (
     <StyledTokenInput>
-      <StyledMaxText>
-        {label}
-      </StyledMaxText>
+      <StyledMaxText>{label}</StyledMaxText>
       <Input
         endAdornment={
           <StyledTokenAdornmentWrapper>
