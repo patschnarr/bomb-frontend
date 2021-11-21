@@ -52,7 +52,7 @@ const Footer = () => {
           </Grid>
           <Grid item xs={6} style={{ textAlign: 'right' }}>
             <a
-              href="https://twitter.com/bombfinance"
+              href="https://twitter.com/BombMoneyBSC"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
@@ -60,17 +60,17 @@ const Footer = () => {
               <img alt="twitter" src={TwitterImage} className={classes.img} />
             </a>
             <a
-              href="https://github.com/bombfinance/bombfinance-frontend"
+              href="https://github.com/bombmoney/bomb-frontend"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
             >
               <img alt="github" src={GithubImage} className={classes.img} />
             </a>
-            <a href="https://t.me/bombfinance" rel="noopener noreferrer" target="_blank" className={classes.link}>
+            <a href="https://t.me/bombmoneybsc" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="telegram" src={TelegramImage} className={classes.img} />
             </a>
-            <a
+            {/* <a
               href="https://www.youtube.com/channel/UCGf87DxPzLXwPrfYpXIkaLQ"
               rel="noopener noreferrer"
               target="_blank"
@@ -80,7 +80,7 @@ const Footer = () => {
             </a>
             <a href="http://discord.bomb.money/" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="discord" src={DiscordImage} className={classes.img} />
-            </a>
+            </a> */}
           </Grid>
         </Grid>
       </Container>
