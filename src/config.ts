@@ -151,6 +151,18 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     sort: 0,
     closedForStaking: false,
   },
+  BombWBNBGenesisRewardPool: {
+    name: 'Earn BOMB by WBNB',
+    poolId: 4,
+    sectionInUI: 0,
+    contract: 'BombWBNBGenesisRewardPool',
+    depositTokenName: 'WBNB',
+    earnTokenName: 'BOMB',
+    finished: false,
+    sort: 6,
+    closedForStaking: false,
+  },
+
   // BombShibaRewardPool: {
   //   name: 'Earn BOMB by SHIBA',
   //   poolId: 2,
