@@ -146,7 +146,7 @@ const Home = () => {
               <h2>Schedule</h2>
               <ul>
                 <li>
-                  <strong>Genesis Farm:</strong> Nov 20 23:00 - 24 hrs
+                  <strong>Genesis Farm:</strong> Nov 20 23:00 - FINISHED
                 </li>
                 <li>
                   <strong>Bomb Farm:</strong> Nov 21 23:00 - 9 days
