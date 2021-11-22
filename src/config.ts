@@ -105,7 +105,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BOMB',
     finished: false,
     sort: 3,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BombSBTCRewardPool: {
     name: 'Earn BOMB by SBTC',
@@ -116,7 +116,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BOMB',
     finished: false,
     sort: 4,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BombSUSDRewardPool: {
     name: 'Earn BOMB by SUSD',
@@ -127,7 +127,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BOMB',
     finished: false,
     sort: 5,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BombSVLRewardPool: {
     name: 'Earn BOMB by SVL',
@@ -138,7 +138,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BOMB',
     finished: false,
     sort: 6,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BombBTCLPBombRewardPool: {
     name: 'Earn BOMB by BOMB-BTC LP',
@@ -160,9 +160,19 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BOMB',
     finished: false,
     sort: 1,
-    closedForStaking: false,
+    closedForStaking: true,
   },
-
+  // BombBnbLPRewardPool: {
+  //   name: 'Earn BOMB by BOMB-BNB LP',
+  //   poolId: 1,
+  //   sectionInUI: 1,
+  //   contract: 'BombBnbLPRewardPool',
+  //   depositTokenName: 'BOMB-BNB-LP',
+  //   earnTokenName: 'BOMB',
+  //   finished: false,
+  //   sort: 8,
+  //   closedForStaking: false,
+  // },
   // BombShibaRewardPool: {
   //   name: 'Earn BOMB by SHIBA',
   //   poolId: 2,

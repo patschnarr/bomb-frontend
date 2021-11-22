@@ -305,7 +305,7 @@ export class BombFinance {
   ) {
     if (earnTokenName === 'BOMB') {
       if (!contractName.endsWith('BombRewardPool')) {
-        const rewardPerSecond = await poolContract.bombPerSecond();
+        const rewardPerSecond = await poolContract.tSharePerSecond();
         if (depositTokenName === 'WBNB') {
           return rewardPerSecond.mul(6000).div(11000).div(24);
         } else if (depositTokenName === 'CAKE') {

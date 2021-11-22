@@ -80,8 +80,7 @@ const Farm = () => {
                     Genesis Pools
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    Genesis pools run for the first 24 hours and will end at the same time the Bomb reward pool above
-                    begins. November 21 23:00 UTC
+                    Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
