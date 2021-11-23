@@ -34,9 +34,11 @@ const ProvideLiquidity = () => {
   const bombFinance = useBombFinance();
   const [approveTaxOfficeStatus, approveTaxOffice] = useApproveTaxOffice();
   const bombBalance = useTokenBalance(bombFinance.BOMB);
-  const ftmBalance = (balance / 1e18).toFixed(4);
+  const btcBalance = useTokenBalance(bombFinance.BTC);
+
+  const ftmBalance = (btcBalance / 1e18).toFixed(4);
   const { onProvideBombFtmLP } = useProvideBombFtmLP();
-  const bombFtmLpStats = useLpStats('BOMB-BNB-LP');
+  const bombFtmLpStats = useLpStats('BOMB-BTCB-LP');
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bombPriceInBNB = useMemo(() => (bombStats ? Number(bombStats.tokenInFtm).toFixed(2) : null), [bombStats]);

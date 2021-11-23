@@ -11,10 +11,6 @@ import bombFtmLpLogo from '../../assets/img/bomb-btc-lp-512.png';
 import bshareFtmLpLogo from '../../assets/img/bshare-bnb-lp-512.png';
 
 import bnbLogo from '../../assets/img/bnb.png';
-import wftmLogo from '../../assets/img/bnb.png';
-import booLogo from '../../assets/img/bnb.png';
-import zooLogo from '../../assets/img/bnb.png';
-import shibaLogo from '../../assets/img/bnb.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
