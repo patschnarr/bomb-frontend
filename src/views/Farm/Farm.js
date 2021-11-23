@@ -44,7 +44,7 @@ const Farm = () => {
                     Earn BSHARE by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    BShare farms begin producing rewards: November 25 23:00 UTC and continue for 365 days.
+                    BSHARE FARMS START November 25 23:00 UTC and continue for 365 days.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -61,8 +61,8 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn BOMB by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="warning">
-                    Bomb reward pools start November 21st 23:00 UTC and will go on for 9 days.
+                  <Alert variant="filled" severity="info">
+                    Bomb reward pools are RUNNING!  They will end November 30th at 23:00 UTC.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -79,7 +79,7 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Genesis Pools
                   </Typography>
-                  <Alert variant="filled" severity="warning">
+                  <Alert variant="filled" severity="error">
                     Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
