@@ -140,7 +140,7 @@ const Nav = () => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Bomb Money
+              bomb.money
             </Typography>
 
             <Drawer
