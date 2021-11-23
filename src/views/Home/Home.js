@@ -332,12 +332,12 @@ const Home = () => {
                   <TokenSymbol symbol="BBOND" />
                 </CardIcon>
               </Box>
-              Current Price
+              Price per unit
               <Box>
-                <span style={{ fontSize: '30px' }}>{tBondPriceInBNB ? tBondPriceInBNB : '-.----'} BNB</span>
+                <span style={{ fontSize: '30px' }}>{tBondPriceInBNB ? tBondPriceInBNB : '-.----'} BTC</span>
               </Box>
               <Box>
-                <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'}</span>
+                <span style={{ fontSize: '16px' }}>${tBondPriceInDollars ? tBondPriceInDollars : '-.--'} relative to BOMB</span>
               </Box>
               <span style={{ fontSize: '12px' }}>
                 Market Cap: ${(tBondCirculatingSupply * tBondPriceInDollars).toFixed(2)} <br />

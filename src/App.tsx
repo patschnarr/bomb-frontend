@@ -21,9 +21,9 @@ import { RefreshContextProvider } from './contexts/RefreshContext';
 const Home = lazy(() => import('./views/Home'));
 const Farm = lazy(() => import('./views/Farm'));
 const Boardroom = lazy(() => import('./views/Boardroom'));
-const Pit = lazy(() => import('./views/Pit'));
-const SBS = lazy(() => import('./views/Sbs'));
-const Liquidity = lazy(() => import('./views/Liquidity'));
+const Bond = lazy(() => import('./views/Bond'));
+// const SBS = lazy(() => import('./views/Sbs'));
+// const Liquidity = lazy(() => import('./views/Liquidity'));
 
 const NoMatch = () => (
   <h3 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -55,18 +55,18 @@ const App: React.FC = () => {
             <Route path="/boardroom">
               <Boardroom />
             </Route>
-            <Route path="/pit">
-              <Pit />
+            <Route path="/bond">
+              <Bond />
             </Route>
-            <Route path="/sbs">
+            {/* <Route path="/sbs">
               <SBS />
-            </Route>
+            </Route> */}
             <Route path="/regulations">
               <Regulations />
             </Route>
-            <Route path="/liquidity">
+            {/* <Route path="/liquidity">
               <Liquidity />
-            </Route>
+            </Route> */}
             <Route path="*">
               <NoMatch />
             </Route>

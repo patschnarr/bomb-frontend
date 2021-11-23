@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import Page from '../../components/Page';
-import PitImage from '../../assets/img/pit.png';
+import BondImage from '../../assets/img/pit.png';
 import { createGlobalStyle } from 'styled-components';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
@@ -10,6 +10,7 @@ import ExchangeCard from './components/ExchangeCard';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useBondStats from '../../hooks/useBondStats';
+import useBombStats from '../../hooks/useBombStats';
 import useBombFinance from '../../hooks/useBombFinance';
 import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
 import { useTransactionAdder } from '../../state/transactions/hooks';
@@ -18,24 +19,28 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../bomb-finance/constants';
+import { BigNumber } from 'ethers';
 
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${PitImage}) no-repeat !important;
+    background: url(${BondImage}) no-repeat !important;
     background-size: cover !important;
   }
 `;
 
-const Pit: React.FC = () => {
+const Bond: React.FC = () => {
   const { path } = useRouteMatch();
   const { account } = useWallet();
   const bombFinance = useBombFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
+  const bombStat = useBombStats();
   const cashPrice = useCashPriceInLastTWAP();
-  const bondsPurchasable = useBondsPurchasable();
 
+  const  bondsPurchasable  = useBondsPurchasable();
+  
   const bondBalance = useTokenBalance(bombFinance?.BBOND);
+ // const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice).toFixed(4) : null), [cashPrice]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
@@ -85,15 +90,15 @@ const Pit: React.FC = () => {
               </StyledCardWrapper>
               <StyledStatsWrapper>
                 <ExchangeStat
-                  tokenName="BOMB"
+                  tokenName="10,000 BOMB"
                   description="Last-Hour TWAP Price"
-                  price={getDisplayBalance(cashPrice, 18, 4)}
+                  price={Number(bombStat?.tokenInFtm).toFixed(4) || '-'}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
-                  tokenName="BBOND"
+                  tokenName="10,0000 BBOND"
                   description="Current Price: (BOMB)^2"
-                  price={Number(bondStat?.tokenInFtm).toFixed(2) || '-'}
+                  price={Number(bondStat?.tokenInFtm).toFixed(4) || '-'}
                 />
               </StyledStatsWrapper>
               <StyledCardWrapper>
@@ -106,7 +111,7 @@ const Pit: React.FC = () => {
                   priceDesc={`${getDisplayBalance(bondBalance)} BBOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when BOMB > ${BOND_REDEEM_PRICE}BNB` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when 10,000 BOMB > ${BOND_REDEEM_PRICE}BTC` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>
@@ -149,4 +154,4 @@ const StyledStatsWrapper = styled.div`
   }
 `;
 
-export default Pit;
+export default Bond;

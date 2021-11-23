@@ -250,8 +250,16 @@ export class BombFinance {
     return Treasury.getBombUpdatedPrice();
   }
 
+  // async getBombPegTWAP(): Promise<any> {
+  //   const { Treasury } = this.contracts;
+  //   const updatedPrice = Treasury.getBombUpdatedPrice();
+  //   const updatedPrice2 = updatedPrice * 10000;
+  //   return updatedPrice2;
+  // }
+
   async getBondsPurchasable(): Promise<BigNumber> {
     const { Treasury } = this.contracts;
+    // const burnableBomb = (Number(Treasury.getBurnableBombLeft()) * 1000).toFixed(2).toString();
     return Treasury.getBurnableBombLeft();
   }
 
