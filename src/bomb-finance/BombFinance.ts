@@ -793,13 +793,13 @@ export class BombFinance {
       let assetUrl;
       if (assetName === 'BOMB') {
         asset = this.BOMB;
-        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/logo_tomb_CircleBlack.png';
+        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bomb-512.png';
       } else if (assetName === 'BSHARE') {
         asset = this.BSHARE;
-        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/logo_tomb_share_BlackCircle.png';
+        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bshare-512.png';
       } else if (assetName === 'BBOND') {
         asset = this.BBOND;
-        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/logo_tomb_bond_CircleBlack.png';
+        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bbond-512.png';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
