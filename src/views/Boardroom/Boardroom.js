@@ -29,9 +29,16 @@ import ProgressCountdown from './components/ProgressCountdown';
 import BoardroomImage from '../../assets/img/boardroom.png';
 import { createGlobalStyle } from 'styled-components';
 
+// const BackgroundImage = createGlobalStyle`
+//   body, html {
+//     background: url(${BoardroomImage}) no-repeat !important;
+//     background-size: cover !important;
+//   }
+// `;
+
 const BackgroundImage = createGlobalStyle`
-  body, html {
-    background: url(${BoardroomImage}) no-repeat !important;
+  body {
+    background-color: grey;
     background-size: cover !important;
   }
 `;

@@ -15,12 +15,21 @@ import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
 
+// const BackgroundImage = createGlobalStyle`
+//   body {
+//     background: url(${FarmImage}) no-repeat !important;
+//     background-size: cover !important;
+//   }
+// `;
+
+
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${FarmImage}) no-repeat !important;
+    background-color: grey;
     background-size: cover !important;
   }
 `;
+
 
 const Farm = () => {
   const [banks] = useBanks();

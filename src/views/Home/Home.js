@@ -28,12 +28,20 @@ import ZapModal from '../Bank/components/ZapModal';
 import { makeStyles } from '@material-ui/core/styles';
 import useBombFinance from '../../hooks/useBombFinance';
 
+// const BackgroundImage = createGlobalStyle`
+//   body {
+//     background: url(${HomeImage}) no-repeat !important;
+//     background-size: cover !important;
+//   }
+// `;
+
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${HomeImage}) no-repeat !important;
+    background-color: grey;
     background-size: cover !important;
   }
 `;
+
 
 const useStyles = makeStyles((theme) => ({
   button: {
