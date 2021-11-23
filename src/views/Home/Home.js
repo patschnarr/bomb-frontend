@@ -186,16 +186,15 @@ const Home = () => {
           </Paper>
         </Grid>
 
-        {/* <Grid container spacing={3}>
+        <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
-            <Alert variant="filled" severity="warning">
+            <Alert variant="filled" severity="error">
               <b>
-                We are fully launched, the protocol is all working.  Please allow us until Nov 23rd to update website graphics and release our documentation.
-                For now, reference the <a target="_blank" href="https://docs.tomb.finance">tomb.finance documentation</a> is it is largely the same as our project.
+                We are in the process of upgrading our boardroom smart contract. If you have staked BSHARE in the boardroom, kindly remove at your earliest convenience.
               </b>
             </Alert>
           </Grid>
-        </Grid> */}
+        </Grid>
 
         {/* TVL */}
         <Grid item xs={12} sm={4}>
