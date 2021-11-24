@@ -152,6 +152,7 @@ const Home = () => {
           <Paper>
             <Box p={4}>
               <h2>Schedule</h2>
+              <p></p>
               <ul>
                 <li>
                   <strong>Genesis Farm:</strong> Nov 20 23:00 - FINISHED
@@ -212,14 +213,14 @@ const Home = () => {
           <Card style={{ height: '100%' }}>
             <CardContent align="center" style={{ marginTop: '2.5%' }}>
               {/* <h2 style={{ marginBottom: '20px' }}>Wallet Balance</h2> */}
-              <Button color="primary" href="/boardroom" variant="contained" style={{ marginRight: '10px' }}>
+              <Button color="" href="/boardroom" variant="contained" style={{ marginRight: '10px' }}>
                 Stake Now
               </Button>
               <Button href="/farm" variant="contained" style={{ marginRight: '10px' }}>
                 Farm Now
               </Button>
               <Button
-                color="primary"
+                color=""
                 target="_blank"
                 href={buyBombAddress}
                 variant="contained"

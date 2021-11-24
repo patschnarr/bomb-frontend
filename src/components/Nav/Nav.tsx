@@ -52,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   toolbarTitle: {
-    fontFamily: '"Amarante", cursive',
-    fontSize: '30px',
+    fontFamily: '"Tahoma", cursive',
+    fontSize: '0px',
     flexGrow: 1,
   },
   link: {
@@ -97,7 +97,7 @@ const Nav = () => {
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">Bomb Money</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-                bomb.money
+                <img src="./bomb-256.png" height="60px" />
               </Link>
             </Typography>
             <Box mr={5}>
