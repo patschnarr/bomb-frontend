@@ -125,8 +125,8 @@ const Boardroom = () => {
 
             <Grid container justify="center">
               <Box mt={3} style={{ width: '600px' }}>
-                <Alert variant="filled" severity="error">
-                  PLEASE REMOVE ALL BSHARE FROM BOARDROOM WE ARE UPGRADING SMART CONTRACTS NOV 23RD.
+                <Alert variant="filled" severity="warning">
+                  Nov 23rd boardroom contract was upgraded.  All BSHARE stakers have been sent BSHARE back to their wallets. Please restake in the new Boardroom.
                 </Alert>
               </Box>
             </Grid>

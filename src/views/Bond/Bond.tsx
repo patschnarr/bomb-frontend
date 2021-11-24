@@ -21,9 +21,16 @@ import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../bomb-finance/constants';
 import { BigNumber } from 'ethers';
 
+// const BackgroundImage = createGlobalStyle`
+//   body {
+//     background: url(${BondImage}) no-repeat !important;
+//     background-size: cover !important;
+//   }
+// `;
+
 const BackgroundImage = createGlobalStyle`
   body {
-    background: url(${BondImage}) no-repeat !important;
+    background-color: grey;
     background-size: cover !important;
   }
 `;

@@ -186,7 +186,7 @@ const Home = () => {
           </Paper>
         </Grid>
 
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
             <Alert variant="filled" severity="error">
               <b>
@@ -194,7 +194,7 @@ const Home = () => {
               </b>
             </Alert>
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* TVL */}
         <Grid item xs={12} sm={4}>

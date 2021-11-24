@@ -2605,7 +2605,7 @@
     ]
   },
   "Boardroom": {
-    "address": "0x2Ec1Be1dceA5c9fB040419DEDA55B1aC39e9387f",
+    "address": "0xA6aC7fD7b684a2683A3F649D5e57aba4bB7d6653",
     "abi": [
       {
         "anonymous": false,
@@ -9207,7 +9207,7 @@
     ]
   },
   "Treasury": {
-    "address": "0xe05b8829b0F1eD627B77CF5B53AB558098afD256",
+    "address": "0x3F786c9b81b1B3D456e97BAEd6EB7Be083aD60ea",
     "abi": [
       {
         "anonymous": false,
