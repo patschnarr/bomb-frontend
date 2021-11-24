@@ -53,7 +53,9 @@ const Farm = () => {
                     Earn BSHARE by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    BSHARE FARMS START November 25 23:00 UTC and continue for 365 days.
+                    BSHARE FARMS START November 25 23:00 UTC and continue for 365 days.<br />
+                    We have decided to pursue a listing with ApeSwap and will be switching both BSHARE farming pools to ApeSwap from PancakeSwap.<br />
+                    <strong>Soon we will add the two ApeSwap LP farms here, and put all allocation points on them. For now, please remove all tokens staked in these two PancakeSwap LP Farms.</strong>
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -71,7 +73,8 @@ const Farm = () => {
                     Earn BOMB by staking LP
                   </Typography>
                   <Alert variant="filled" severity="info">
-                    Bomb reward pools are RUNNING!  They will end November 30th at 23:00 UTC.
+                    Bomb reward pools are RUNNING!  They will end November 30th at 23:00 UTC.<br />
+                    ApeSwap LP Farm will be added here soon and allocation points gradually shifted to it as liquidity moves.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
