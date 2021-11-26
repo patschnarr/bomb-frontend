@@ -183,6 +183,9 @@ const Home = () => {
                 Stake your BOMB-BTC LP in the Farm to earn BSHARE rewards. Then stake your earned BSHARE in the
                 Boardroom to earn more BOMB!
               </p>
+              <p>
+                <img alt="telegram" src="/static/media/telegram.28146bd8.svg" class="makeStyles-img-50" /> Join our <a href="https://t.me/bombmoneybsc" target="_blank">Telegram</a> to find out more!
+              </p>
             </Box>
           </Paper>
         </Grid>

@@ -17,6 +17,11 @@ html,
 body {
   overflow-y: auto;
   height: 100%;
+  background-image: url("./BombBack.png") ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .makeStyles-paper-11,
